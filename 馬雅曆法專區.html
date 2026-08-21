@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>馬雅曆法專區</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#1a1a2e;color:#d4d4e0;font-family:'Noto Sans TC','PingFang TC',sans-serif;line-height:1.9;padding:40px 20px}
+  .container{max-width:820px;margin:0 auto}
+  .title{font-size:30px;color:#e8d5a3;text-align:center;margin-bottom:6px}
+  .subtitle{text-align:center;color:#8888bb;margin-bottom:36px;font-size:14px}
+  .lead{background:#16213e;border-radius:12px;padding:26px 30px;margin-bottom:24px;border:1px solid #2a2a55}
+  .lead p{font-size:15px;color:#c8c8dc;line-height:1.85}
+  .lead b{color:#e8d5a3}
+  .section{background:#16213e;border-radius:12px;padding:26px 30px;margin-bottom:24px;border:1px solid #2a2a55}
+  h2{font-size:21px;color:#e8d5a3;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid #2a2a55}
+  h3{font-size:17px;color:#d4c58a;margin:18px 0 10px}
+  p{margin-bottom:12px;font-size:14.5px;color:#c8c8dc;line-height:1.85}
+  table{width:100%;border-collapse:collapse;margin:16px 0}
+  th,td{border:1px solid #2a2a55;padding:10px 13px;text-align:left;vertical-align:top;font-size:13.5px}
+  th{background:#1f2a4a;color:#e8d5a3;font-weight:600}
+  tr:nth-child(even) td{background:#18234a}
+  td b{color:#e8d5a3}
+  .quote{background:#1f2a4a;border-left:4px solid #e8d5a3;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-size:14.5px}
+  .quote b{color:#e8d5a3}
+  .warn{background:#241f38;border-left:4px solid #d08a5a;padding:13px 16px;border-radius:0 8px 8px 0;margin:14px 0;font-size:14px}
+  .warn b{color:#e0a06a}
+  ul{padding-left:22px;margin:10px 0}
+  li{margin:7px 0;font-size:14.5px;color:#c8c8dc}
+  .num{font-family:'Courier New',monospace;color:#a0d8a8;font-size:13.5px}
+  .back{display:inline-block;padding:8px 18px;background:#2a2a55;color:#d4d4e0;text-decoration:none;border-radius:6px;font-size:14px;margin-top:10px}
+  .foot{text-align:center;color:#7777aa;font-size:12.5px;margin-top:40px;padding-top:18px;border-top:1px solid #2a2a55}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <div class="title">🌽 馬雅曆法專區</div>
+  <div class="subtitle">260 天 · 365 天 · 18月＋5 · 52年 · 金星584 · 37960 · 5125年 —— 一次看懂马雅的时间观</div>
+
+  <div class="lead">
+    <p>马雅人不是用一套历法，而是用<b>三套各司其职、互相咬合的齿轮</b>：一颗管<b>命运</b>、一颗管<b>日子与季节</b>、一颗管<b>历史的长河</b>。它们同时转，就像三支时钟报不同的时间——这就是马雅人对「时间」的三重理解。本专区分三部分：<b>完整历法对照</b>、<b>马雅数学单位</b>、<b>金星专区</b>。</p>
+  </div>
+
+  <!-- PART 1: 完整历法对照 -->
+  <div class="section">
+    <h2>一、马雅三套历法总览</h2>
+    <table>
+      <tr><th style="width:22%">历法</th><th style="width:28%">天数</th><th>管什么</th></tr>
+      <tr><td><b>Tzolk'in</b> 神圣历</td><td><span class="num">260 天</span><br>20 日名 × 13 数字</td><td>命运、能量、占卜、命名、择日</td></tr>
+      <tr><td><b>Haab</b> 太阳历</td><td><span class="num">365 天</span><br>18 月×20 天 + 5 天</td><td>季节、农耕、节庆、生活安排</td></tr>
+      <tr><td><b>Long Count</b> 长纪历</td><td><span class="num">≈5125 年</span><br>13 baktun = 1,872,000 天</td><td>历史长河、记录王权与战争</td></tr>
+    </table>
+    <div class="quote"><b>一句话：</b>260 天看命运、365 天过日子、5125 年的长纪历记长河。</div>
+
+    <h3>完整对照表（从最小到最大）</h3>
+    <table>
+      <tr><th>层级</th><th style="width:26%">周期</th><th>算法</th><th>对表关系</th></tr>
+      <tr><td>1</td><td><b>260 天神圣历</b></td><td><span class="num">20 日名 × 13 数字</span></td><td>自身循环，用于占卜</td></tr>
+      <tr><td>2</td><td><b>365 天太阳历</b></td><td><span class="num">18 月 × 20 天 + 5 天 Wayeb</span></td><td>季节、农耕</td></tr>
+      <tr><td>3</td><td><b>584 天金星周期</b></td><td><span class="num">236+90+250+8</span></td><td>晨星 / 上合 / 昏星 / 下合</td></tr>
+      <tr><td>4</td><td><b>2,920 天</b></td><td><span class="num">5 金星 × 584 = 8 太阳年 × 365</span></td><td>金星 ⟷ 太阳对表</td></tr>
+      <tr><td>5</td><td><b>52 年（历法轮）</b></td><td><span class="num">260 与 365 的 LCM = 18,980 天</span></td><td>神圣历 ⟷ 太阳历对表（<b>非金星</b>）</td></tr>
+      <tr><td>6</td><td><b>37,960 天</b></td><td><span class="num">65 金星 × 584 = 37,960</span><br>= <span class="num">146 × 260 = 104 × 365</span></td><td>金星 ⟷ 神圣历 ⟷ 太阳历三对表</td></tr>
+      <tr><td>7</td><td><b>≈5125 年长纪历</b></td><td><span class="num">13 baktun = 1,872,000 天</span></td><td>历史长河（2012「末日」= 此周期轮完）</td></tr>
+    </table>
+    <div class="quote"><b>核心对表公式：</b><br><span class="num">65 × 584 = 37,960 天 = 146 × 260（神圣历） = 104 × 365（太阳年）</span><br>三套历法在跑满 37,960 天（约 104 年）时<b>完全对齐</b>——德累斯顿抄本金星表横跨的正是这 65 个金星周期。</div>
+  </div>
+
+  <!-- PART 2: 马雅数学单位 -->
+  <div class="section">
+    <h2>二、马雅数学单位</h2>
+    <h3>数字符号</h3>
+    <table>
+      <tr><th>符号</th><th>值</th></tr>
+      <tr><td>点（dot）</td><td>1</td></tr>
+      <tr><td>横杠（bar）</td><td>5</td></tr>
+      <tr><td>贝壳／离位符号</td><td>0（位数留空的「零」）</td></tr>
+    </table>
+    <p>马雅是<b>全世界最早发展出「零」概念</b>的文明之一（比欧洲早数百年）——这是马雅数学最重要的成就。数字用「点＋横杠」堆叠表示，如 7 = 一横杠（5）＋两点（2）。</p>
+
+    <h3>长纪历位值单位（20 进位，一处天文例外）</h3>
+    <table>
+      <tr><th>单位</th><th>天数</th><th>进位关系</th></tr>
+      <tr><td>k'in</td><td><span class="num">1</span></td><td>基本日</td></tr>
+      <tr><td>uinal</td><td><span class="num">20</span></td><td>20 k'in</td></tr>
+      <tr><td>tun</td><td><span class="num">360</span></td><td>18 uinal（<b>天文例外</b>，非 20）</td></tr>
+      <tr><td>katun</td><td><span class="num">7,200</span></td><td>20 tun</td></tr>
+      <tr><td>baktun</td><td><span class="num">144,000</span></td><td>20 katun</td></tr>
+      <tr><td>piktun</td><td><span class="num">2,880,000</span></td><td>20 baktun</td></tr>
+      <tr><td>kalabtun</td><td><span class="num">57,600,000</span></td><td>20 piktun</td></tr>
+    </table>
+    <p>马雅计数是 <b>20 进位</b>（人 20 指趾），但长纪历的 tun 有一处天文例外——为贴近真实太阳年 360 天，改用 18 uinal 而非 20。位值从右到左：<span class="num">k'in(1) → uinal(20) → tun(360) → katun(7200) → baktun(144000)</span>。</p>
+    <p><b>13 baktun = 1,872,000 天 ≈ 5125 年</b>（长纪历完整大周期）。</p>
+
+    <h3>20 进制量词</h3>
+    <table>
+      <tr><th>马雅量词</th><th>值</th><th>对应</th></tr>
+      <tr><td>'k'al（或 vinik）</td><td>20</td><td>20（根基）</td></tr>
+      <tr><td>'p'ik</td><td>400</td><td>20²</td></tr>
+      <tr><td>'k'alab</td><td>8,000</td><td>20³</td></tr>
+      <tr><td>'k'ach</td><td>160,000</td><td>20⁴</td></tr>
+    </table>
+    <div class="quote"><b>有趣的是</b>：马雅语「<b>vinik</b>（人）」这个词同时指「20」——因为人的手指脚趾共 20 个，「一个完整的人＝20」。这正呼应用身体数日子的计算传统（13 大关节 × 20 指趾 = 260 天）。</div>
+  </div>
+
+  <!-- PART 3: 金星专区 -->
+  <div class="section">
+    <h2>三、金星专区：马雅最重视的一颗星</h2>
+    <p>金星是马雅人最用心观测的一颗星。它有<b>实打实的考古证据</b>，但也有一个常被误传的点——它<b>不对应春分秋分四节气</b>。这里讲清楚。</p>
+
+    <h3>金星的周期：584 天（四个相位）</h3>
+    <table>
+      <tr><th>相位</th><th>天数</th><th>说明</th></tr>
+      <tr><td>晨星（Morning star）</td><td><span class="num">236</span></td><td>日出前可见</td></tr>
+      <tr><td>上合（Superior conjunction）</td><td><span class="num">90</span></td><td>太阳后消失</td></tr>
+      <tr><td>昏星（Evening star）</td><td><span class="num">250</span></td><td>日落后可见</td></tr>
+      <tr><td>下合（Inferior conjunction）</td><td><span class="num">8</span></td><td>日地之间短暂消失</td></tr>
+      <tr><td><b>合计</b></td><td><b><span class="num">584</span></b></td><td>236+90+250+8</td></tr>
+    </table>
+    <p>金星真实会合周期 = <b>583.92 天</b>，马雅人用 <b>584</b>——只差 0.08 天，且用校正表长期不漂移。</p>
+
+    <h3>有证明吗？——有，德累斯顿抄本是铁证</h3>
+    <ul>
+      <li>现存德累斯顿抄本（Dresden Codex）第 <b>46–50 页</b>是金星表，精确预测金星的<b>偕日升（heliacal rise，金星作为晨星在日出前升起）</b>。</li>
+      <li>金星表记录了自己的<b>基准日</b>（约 933/934 年 11 月 23 日）——这是马雅人自己写下来的观测基准，不是后人编的。</li>
+      <li>学界称马雅把金星升起当作<b>「星战（Star Wars）」</b>的占卜点——把发动战争、重要祭祀专门排在金星特定位置那天。</li>
+    </ul>
+
+    <h3>对得上太阳历吗？——对得上「8 年」，但不是「节气」</h3>
+    <div class="quote"><span class="num">5 个金星周期 × 584 = 2,920 天 = 8 个太阳年 × 365</span><br>每 8 年，金星回到跟太阳年同一个相对位置（略有漂移，靠校正表补）。</div>
+
+    <div class="warn"><b>⚠ 概念校正：金星 ≠ 春分秋分四节气</b><br>
+      春分秋分、冬至夏至（节气）是<b>太阳的位置</b>（地球绕太阳），属于太阳历/天文四季；金星 584 天是<b>金星相对太阳/地球的位置</b>（内行星的晨昏星循环），是<b>另一条天文轴</b>。两者<b>没有对应关系</b>——金星周期不会恰好落在春分秋分上。马雅人也没有把金星表跟二十四节气绑定（二十四节气是东亚农事历，不是中美洲概念）。</div>
+  </div>
+
+  <!-- PART 4: 易错提醒 -->
+  <div class="section">
+    <h2>四、易错提醒（策展必读）</h2>
+    <div class="warn"><b>⚠ 数字从「0」起算：</b>马雅 Haab 的日期在月内编 0 到 19，0 是「坐月日」。所以「2 K'ank'in」是 K'ank'in 的第 3 天（不是第 2 天）。</div>
+    <div class="warn"><b>⚠ 是 5125 年、不是 5118：</b>长纪历完整周期 = 13 baktun = 5,125 年。有人讲成 5118，是混淆了，别写错。</div>
+    <div class="warn"><b>⚠ 52 年 ≠ 半个金星周期：</b>52 年是 260 天 × 365 天的对表（18,980 天），跟金星（584）完全无关。半个金星是 292 天。</div>
+    <div class="warn"><b>⚠ 金星 ≠ 260 + 相位 + 260：</b>单个 584 天里没有「260」这只轮子。正确分解是 236+90+250+8。金星跟 260 天的关系在「大周期 37,960 天」那层（65 金星 = 146 神圣历）。</div>
+    <div class="warn"><b>⚠ 260 天是全中美洲共享传统：</b>马雅、阿兹特克、萨波特克用的是同一套历法的各地变体，起源比马雅更早（最早证据墨西哥 Oxtotitlán 洞穴，约前 800–500 年；学者多指向奥尔梅克）。</div>
+    <div class="warn"><b>⚠ 「13」的来源无定论：</b>马雅没留下为什么用 13 的记载。主流假说：身体说（13 大关节 × 20 指趾 = 260）、孕期说（260 ≈ 人类孕期 266 天）。讲成「学界在讨论」，不要当定论。</div>
+    <div class="warn"><b>⚠ 长纪历的「创世起点」是神话纪年，不是历史事件：</b>13.0.0.0.0 是马雅神话的换算原点（新循环开始），并非宇宙真正被创造的「物理起点」；「等于前 3114 年 8 月 11 日」是现代学者用 GMT 相关法换算的，不是马雅人原话。</div>
+  </div>
+
+  <!-- PART 5: 五系统分工 -->
+  <div class="section">
+    <h2>五、马雅四套时间系统：分工不同</h2>
+    <table>
+      <tr><th>系统</th><th>性质</th><th>跟长纪历关系</th></tr>
+      <tr><td><b>长纪历</b></td><td>线性绝对天数（不重复）</td><td>基准/原点</td></tr>
+      <tr><td><b>神圣历 260</b></td><td>循环，命运</td><td>同日期配套标记</td></tr>
+      <tr><td><b>太阳历 365</b></td><td>循环，季节</td><td>同日期配套标记</td></tr>
+      <tr><td><b>金星 584</b></td><td>循环，天文/祭祀</td><td>独立，仅操作连动</td></tr>
+    </table>
+    <div class="quote">马雅人把「长纪历」当作不重复的绝对时间轴记历史；「神圣历 260、太阳历 365、金星 584」是循环的齿轮。一个日期用长纪历定位到「第几天」，再标出它落在几颗循环齿轮的哪一格。<b>长纪历独立于它们，不是它们的倍数——是配套，不是同构。</b></div>
+  </div>
+
+  <div class="foot">
+    整理：小柚子 · 2026 ｜ 马雅历法专区 ｜ <a href="index.html" class="back">← 返回首页</a>
+  </div>
+
+</div>
+</body>
+</html>
