@@ -216,8 +216,8 @@ function gregRing(cx,cy){
   const tl=svgEl("text",{x:polar(cx,cy,ringOut+10,angT)[0],y:polar(cx,cy,ringOut+10,angT)[1],"text-anchor":"middle","font-size":10,fill:"#ffd77a"}); tl.textContent="今天"; g.appendChild(tl);
   return g;
 }
-svg.appendChild(gregRing(170,300));
 svg.appendChild(svgEl("text",{x:170,y:295,"text-anchor":"middle","dominant-baseline":"central","font-size":22,"font-weight":700,fill:"#c8a24a",id:"todayTag","font-family":"-apple-system,'PingFang TC',sans-serif"}));
+wheelGroups["haab"].rot.appendChild(gregRing(170,300));
 central.appendChild(svg);
 // ===== 曆法讀數計算 =====
 function tzRead(n){ const i=((n%260)+260)%260; return {tone:TONES[i%13],day:DAYS[i%20],word:TONES[i%13]+" "+DAYS[i%20]}; }
@@ -238,10 +238,8 @@ const statusEl=document.getElementById("status");
 let n=0;
 function update(){
   const tz=tzRead(n), ha=haabRead(n), ve=venRead(n);
-  const td0=new Date(); const hOff=((doyOf(td0.getFullYear(),td0.getMonth()+1,td0.getDate())-todayMaya().hd))*360/365;
   for(const k in wheelGroups){ const w=wheelGroups[k];
-    const off=(k==="haab")?hOff:0;
-    w.rot.setAttribute("transform","rotate("+(-360*n/w.period+off)+" "+w.cx+" "+w.cy+")"); }
+    w.rot.setAttribute("transform","rotate("+(-360*n/w.period)+" "+w.cx+" "+w.cy+")"); }
   const cr=((n%18980)+18980)%18980;
   const td=new Date();
   document.getElementById("centerRead").innerHTML=
