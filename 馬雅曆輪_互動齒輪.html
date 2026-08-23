@@ -62,7 +62,7 @@
   .central-box{position:relative;width:560px;height:560px;}
   .central-box svg{width:100%;height:100%;display:block;}
   .central-wrap .ptr{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:2px;height:36px;background:#e6b94d;border-radius:2px;z-index:6;box-shadow:0 0 8px rgba(230,185,77,.6);}
-  .center-read{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);text-align:center;z-index:5;pointer-events:none;}
+  .center-read{text-align:center;pointer-events:none;font-family:-apple-system,"PingFang TC",sans-serif;}
   .center-read .d1{font-size:24px;color:#e6b94d;font-weight:800;letter-spacing:.02em;}
   .center-read .d2{font-size:14px;color:#9aa0a6;margin-top:2px;}
   .center-read .d3{font-size:12px;color:#5c6167;margin-top:5px;}
@@ -85,9 +85,7 @@
 
   <!-- WHEELS -->
   <div class="central-wrap">
-    <div class="ptr"></div>
     <div class="central-box" id="central"></div>
-    <div class="center-read" id="centerRead"></div>
   </div>
   <div class="legend" id="legend"></div>
 
@@ -160,32 +158,33 @@ function ringText(items,cx,cy,r,fontSize,fill,stepStart){
   });
   return g;
 }
-// ===== 建立中央同心曆輪（大圈套小圈）=====
+// ===== 建立外切咬合齒輪（三顆相切、齒互相咬合）=====
 const central=document.getElementById("central");
 const legend=document.getElementById("legend");
-const layers=[
-  {key:"haab", period:365, label:"Haab&#39; 365", outer:HAAB, ro:252, ri:212, c:COLORS.haab, teeth:36},
-  {key:"tz",   period:260, label:"Tzolk&#39;in 260", outer:DAYS, ro:186, ri:148, c:COLORS.tz, teeth:26},
-  {key:"ven",  period:584, label:"Venus 584", outer:VENUS.map(v=>v.n), ro:126, ri:94, c:COLORS.ven, teeth:16},
+const G=[
+  {key:"haab",period:365,label:"Haab&#39; 365",outer:HAAB,x:200,y:320,r:175,teeth:28,tr:155},
+  {key:"tz",period:260,label:"Tzolk&#39;in 260",outer:DAYS,x:495,y:320,r:120,teeth:24,tr:96},
+  {key:"ven",period:584,label:"Venus 584",outer:VENUS.map(v=>v.n),x:392,y:137,r:90,teeth:16,tr:48},
 ];
 const wheelGroups={};
-const svg=svgEl("svg",{viewBox:"0 0 560 560"});
-const cx=280, cy=280;
-layers.forEach(L=>{
-  const [c1,c2]=L.c;
+const svg=svgEl("svg",{viewBox:"0 20 640 500"});
+G.forEach(L=>{
+  const [c1,c2]=COLORS[L.key];
   const rot=svgEl("g",{class:"lw"});
-  rot.appendChild(svgEl("polygon",{points:gearPts(cx,cy,L.ro,L.teeth,15),fill:c2,opacity:0.5}));
-  rot.appendChild(svgEl("circle",{cx:cx,cy:cy,r:L.ro,fill:"#141821",stroke:c1,"stroke-width":2}));
-  rot.appendChild(svgEl("circle",{cx:cx,cy:cy,r:L.ri,fill:"#10141b",stroke:c1,"stroke-width":1,"stroke-dasharray":"2 3"}));
-  rot.appendChild(ringText(L.outer,cx,cy,(L.ro+L.ri)/2,12,"#e8e2d0",-90));
+  rot.appendChild(svgEl("polygon",{points:gearPts(L.x,L.y,L.r,L.teeth,13),fill:c2,opacity:0.5}));
+  rot.appendChild(svgEl("circle",{cx:L.x,cy:L.y,r:L.r,fill:"#141821",stroke:c1,"stroke-width":2}));
+  rot.appendChild(svgEl("circle",{cx:L.x,cy:L.y,r:L.r-22,fill:"#10141b",stroke:c1,"stroke-width":1,"stroke-dasharray":"2 3"}));
+  rot.appendChild(ringText(L.outer,L.x,L.y,L.tr,10,"#e8e2d0",-90));
   svg.appendChild(rot);
-  wheelGroups[L.key]={rot:rot,period:L.period,cx:cx,cy:cy};
+  wheelGroups[L.key]={rot:rot,period:L.period,cx:L.x,cy:L.y};
   const lgg=document.createElement("div"); lgg.className="lg";
   lgg.innerHTML='<span class="sw" style="background:'+c1+'"></span>'+L.label+" · "+L.period+" 天";
   legend.appendChild(lgg);
 });
-// 中心圓
-svg.appendChild(svgEl("circle",{cx:cx,cy:cy,r:92,fill:"#0c0f14",stroke:"#e6b94d","stroke-width":2}));
+// 重心讀數（foreignObject）
+const fo=svgEl("foreignObject",{x:265,y:232,width:195,height:100});
+const cbox=document.createElement("div"); cbox.className="center-read"; cbox.id="centerRead";
+fo.appendChild(cbox); svg.appendChild(fo);
 central.appendChild(svg);
 // ===== 曆法讀數計算 =====
 function tzRead(n){ const i=((n%260)+260)%260; return {tone:TONES[i%13],day:DAYS[i%20],word:TONES[i%13]+" "+DAYS[i%20]}; }
