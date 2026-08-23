@@ -69,6 +69,7 @@
   .gmt-clock{margin-top:14px;font-size:15px;color:#9aa0a6;letter-spacing:.04em;font-variant-numeric:tabular-nums;}
   .gmt-clock b{color:var(--gold);}
   .gmt-row{text-align:center;margin-top:8px;font-size:12.5px;color:#5c6167;font-variant-numeric:tabular-nums;}
+  .center-read .d4{font-size:16px;color:#c8a24a;margin-top:9px;font-weight:600;}
   .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:12px;}
   .legend .lg{font-size:12.5px;color:#9aa0a6;display:flex;align-items:center;gap:6px;}
   .legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block;}
@@ -187,6 +188,8 @@ G.forEach(L=>{
   lgg.innerHTML='<span class="sw" style="background:'+c1+'"></span>'+L.label+" · "+L.period+" 天";
   legend.appendChild(lgg);
 });
+// 現在日期標籤（固定在 Haab 圓心，不隨輪轉）
+svg.appendChild(svgEl("text",{x:190,y:335,"text-anchor":"middle","dominant-baseline":"central","font-size":22,"font-weight":700,fill:"#c8a24a",id:"todayTag","font-family":"-apple-system,'PingFang TC',sans-serif"}));
 central.appendChild(svg);
 // ===== 曆法讀數計算 =====
 function tzRead(n){ const i=((n%260)+260)%260; return {tone:TONES[i%13],day:DAYS[i%20],word:TONES[i%13]+" "+DAYS[i%20]}; }
@@ -210,17 +213,19 @@ function update(){
   for(const k in wheelGroups){ const w=wheelGroups[k];
     w.rot.setAttribute("transform","rotate("+(-360*n/w.period)+" "+w.cx+" "+w.cy+")"); }
   const cr=((n%18980)+18980)%18980;
+  const td=new Date();
   document.getElementById("centerRead").innerHTML=
     '<div class="d1">'+tz.word+' · '+ha+'</div>'+
     '<div class="d2">'+ve.phase+' 金星 · 第 '+ve.day+'/584 天</div>'+
-    '<div class="d3">曆法輪第 '+n+' 天 · Calendar Round '+cr+'/18,980（52 年）</div>';
+    '<div class="d3">曆法輪第 '+n+' 天 · Calendar Round '+cr+'/18,980（52 年）</div>'+
+    '<div class="d4">今天：'+td.getFullYear()+' 年 '+(td.getMonth()+1)+' 月 '+td.getDate()+' 日</div>';
   document.getElementById("st-calendar").innerHTML=tz.word+" · "+ha;
   document.getElementById("st-cr").innerHTML=(((n%18980)+18980)%18980)+"<small> /18,980 天（52 年）</small>";
   document.getElementById("st-align").innerHTML=(((n%37960)+37960)%37960)+"<small> /37,960 天</small>";
 }
 
 // ===== GMT 時鐘 =====
-function tickGMT(){const d=new Date();const p=x=>String(x).padStart(2,'0');const fmt=d.getUTCFullYear()+'/'+p(d.getUTCMonth()+1)+'/'+p(d.getUTCDate())+' '+p(d.getUTCHours())+':'+p(d.getUTCMinutes())+':'+p(d.getUTCSeconds())+' UTC';document.getElementById('gmtClock').textContent=fmt;document.getElementById('gmtRow').textContent='GMT 現在：'+fmt;}
+function tickGMT(){const d=new Date();const p=x=>String(x).padStart(2,'0');const fmt=d.getUTCFullYear()+'/'+p(d.getUTCMonth()+1)+'/'+p(d.getUTCDate())+' '+p(d.getUTCHours())+':'+p(d.getUTCMinutes())+':'+p(d.getUTCSeconds())+' UTC';document.getElementById('gmtClock').textContent=fmt;document.getElementById('gmtRow').textContent='GMT 現在：'+fmt;document.getElementById('todayTag').textContent=(d.getMonth()+1)+'月'+d.getDate()+'日';}
 setInterval(tickGMT,1000);tickGMT();
 
 // ===== 互動 =====
