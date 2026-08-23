@@ -62,9 +62,9 @@
   .central-box{position:relative;width:560px;height:560px;}
   .central-box svg{width:100%;height:100%;display:block;}
   .central-wrap .ptr{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:2px;height:36px;background:#e6b94d;border-radius:2px;z-index:6;box-shadow:0 0 8px rgba(230,185,77,.6);}
-  .center-read{text-align:center;pointer-events:none;font-family:-apple-system,"PingFang TC",sans-serif;}
-  .center-read .d1{font-size:24px;color:#e6b94d;font-weight:800;letter-spacing:.02em;}
-  .center-read .d2{font-size:14px;color:#9aa0a6;margin-top:2px;}
+  .center-read{margin:6px auto 0;text-align:center;font-family:-apple-system,"PingFang TC",sans-serif;}
+  .center-read .d1{font-size:32px;color:#e6b94d;font-weight:800;letter-spacing:.03em;line-height:1.2;}
+  .center-read .d2{font-size:14px;color:#9aa0a6;margin-top:5px;}
   .center-read .d3{font-size:12px;color:#5c6167;margin-top:5px;}
   .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:12px;}
   .legend .lg{font-size:12.5px;color:#9aa0a6;display:flex;align-items:center;gap:6px;}
@@ -87,6 +87,7 @@
   <div class="central-wrap">
     <div class="central-box" id="central"></div>
   </div>
+  <div class="center-read" id="centerRead"></div>
   <div class="legend" id="legend"></div>
 
   <!-- CONTROLS -->
@@ -181,10 +182,6 @@ G.forEach(L=>{
   lgg.innerHTML='<span class="sw" style="background:'+c1+'"></span>'+L.label+" · "+L.period+" 天";
   legend.appendChild(lgg);
 });
-// 重心讀數（foreignObject）
-const fo=svgEl("foreignObject",{x:265,y:232,width:195,height:100});
-const cbox=document.createElement("div"); cbox.className="center-read"; cbox.id="centerRead";
-fo.appendChild(cbox); svg.appendChild(fo);
 central.appendChild(svg);
 // ===== 曆法讀數計算 =====
 function tzRead(n){ const i=((n%260)+260)%260; return {tone:TONES[i%13],day:DAYS[i%20],word:TONES[i%13]+" "+DAYS[i%20]}; }
