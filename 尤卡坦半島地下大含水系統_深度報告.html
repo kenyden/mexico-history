@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>尤卡坦半島地下大含水系統 — 深度報告</title>
+<style>
+  :root{
+    --bg:#121212; --panel:#1a1a1a; --card:#202020;
+    --fg:#e8e0d4; --muted:#a89f92; --dim:#6f675c;
+    --accent:#c8a24a; --accent2:#7fb3a0; --border:#2e2a24;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:-apple-system,"PingFang TC","Noto Sans TC","Microsoft JhengHei",sans-serif;
+    line-height:1.85; font-size:17px;
+    padding:0; margin:0;
+  }
+  .wrap{max-width:920px; margin:0 auto; padding:48px 28px 120px;}
+  header.hero{
+    border-bottom:2px solid var(--accent);
+    padding-bottom:28px; margin-bottom:40px;
+  }
+  header.hero h1{
+    font-size:2.1rem; line-height:1.3; color:var(--accent);
+    letter-spacing:.5px; margin-bottom:14px;
+  }
+  header.hero p.sub{
+    color:var(--muted); font-size:1.05rem; margin-bottom:6px;
+  }
+  header.hero p.meta{
+    color:var(--dim); font-size:.85rem; letter-spacing:.3px;
+  }
+  nav.toc{
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:10px; padding:22px 26px; margin-bottom:44px;
+  }
+  nav.toc h2{font-size:1.05rem; color:var(--accent); margin-bottom:14px;}
+  nav.toc ol{margin-left:20px; color:var(--muted);}
+  nav.toc li{margin-bottom:7px; font-size:.95rem; color:var(--muted);}
+  nav.toc li a{color:var(--muted); text-decoration:none; border-bottom:1px dotted var(--dim);}
+  nav.toc li a:hover{color:var(--accent);}
+  section{margin-bottom:52px;}
+  section h2{
+    font-size:1.5rem; color:var(--accent);
+    border-left:4px solid var(--accent); padding-left:14px;
+    margin-bottom:20px; letter-spacing:.3px;
+  }
+  section h3{font-size:1.15rem; color:var(--accent2); margin:26px 0 12px;}
+  p{margin-bottom:16px; text-align:justify;}
+  strong{color:var(--fg);}
+  em{color:var(--muted); font-style:normal;}
+  .lead{font-size:1.08rem; color:var(--muted);}
+  table{width:100%; border-collapse:collapse; margin:18px 0 24px; font-size:.92rem;}
+  th,td{border:1px solid var(--border); padding:11px 14px; text-align:left; vertical-align:top;}
+  th{background:var(--panel); color:var(--accent); font-weight:600;}
+  td{color:var(--fg);}
+  tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+  .callout{
+    background:var(--panel); border-left:4px solid var(--accent2);
+    padding:18px 22px; border-radius:0 8px 8px 0; margin:20px 0;
+  }
+  .callout.warn{border-left-color:#c2574a;}
+  .callout h4{color:var(--accent2); font-size:1rem; margin-bottom:8px;}
+  .callout.warn h4{color:#c9857a;}
+  .tag{display:inline-block; padding:2px 9px; border-radius:4px; font-size:.78rem; margin-right:6px;}
+  .ok{background:#1d3327; color:#8fd0a8;}
+  .myth{background:#33201d; color:#d0a08f;}
+  .ds{background:#2e2a1d; color:#d9c88f;}
+  sup{font-size:.7em; color:var(--accent2);}
+  footer{border-top:1px solid var(--border); margin-top:60px; padding-top:26px; color:var(--dim); font-size:.85rem;}
+  footer h3{color:var(--accent); font-size:1rem; margin-bottom:12px;}
+  .src{margin-bottom:8px; font-size:.86rem; color:var(--muted);}
+  .num{color:var(--accent2); font-weight:600;}
+  code{background:var(--panel); padding:2px 6px; border-radius:4px; font-size:.88em; color:var(--accent2);}
+  @media(max-width:640px){ .wrap{padding:30px 16px 90px;} header.hero h1{font-size:1.6rem;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- HERO -->
+<header class="hero">
+  <h1>尤卡坦半島的地下大含水系統</h1>
+  <p class="sub">Gran Acuífero Maya — 一塊石灰岩大陸與它底下藏著的世界</p>
+  <p class="meta">深度報告 · 知識儲備版 · 含證據等級與來源標注 · 2026-08</p>
+</header>
+
+<!-- TOC -->
+<nav class="toc">
+  <h2>目錄</h2>
+  <ol>
+    <li><a href="#c1">導言：地表文明，地下海洋</a></li>
+    <li><a href="#c2">地理與範圍：半島即一塊巨型岩盤</a></li>
+    <li><a href="#c3">地質骨架：石灰岩大陸的誕生</a></li>
+    <li><a href="#c4">Chicxulub 撞擊：終結恐龍的傷口</a></li>
+    <li><a href="#c5">喀斯特與 cenote：骨架如何變成洞</a></li>
+    <li><a href="#c5b">鐘乳石與洞穴沉積物：讀取古水文</a></li>
+    <li><a href="#c6">水文分層：淡水與鹹水的「地下海洋」</a></li>
+    <li><a href="#c7">兩大系統與「世界最長」之爭</a></li>
+    <li><a href="#c8">GAM 計畫：探索、保護、考古與古生物</a></li>
+    <li><a href="#c9">脆弱性與污染：喀斯特的阿基里斯腱</a></li>
+    <li><a href="#c10">馬雅與水：文明的命脈</a></li>
+    <li><a href="#c11">證據等級總表</a></li>
+    <li><a href="#c12">來源與延伸閱讀</a></li>
+  </ol>
+</nav>
+
+<main>
+<!-- CHAPTER:1 -->
+<section id="c1">
+  <h2>導言：地表文明，地下海洋</h2>
+  <p class="lead">尤卡坦半島（Yucatán Peninsula）在地表上是一片幾乎平坦、沒有山、沒有河流的土地（<a href="#c12">註</a>）。但這片看似單調的平原底下，藏著地球上**最大也最複雜的喀斯特地下水系統之一**——一片橫跨墨西哥三州、瓜地馬拉北部與貝里斯的巨大淡水「地下海洋」，由無數淹沒的洞穴、天然井（cenotes）與地下河道組成。</p>
+
+  <div class="callout">
+    <h4>為什麼這值得深入了解</h4>
+    <p>這片地下水不只是一片水——它是<strong>超過 95% 半島居民飲用水的唯一來源</strong>；它承載著地球上<strong>最長的兩條水下洞穴系統</strong>；它的深處保存著<strong>更新世滅絕動物與最早的美洲人遺骸</strong>；更重要的是——這片含水層的地質骨架，是由<strong>6600 萬年前撞出恐龍滅絕的那顆小行星</strong>奠定出來的。地表是馬雅文明，地底是星球級災難的遺跡。</p>
+  </div>
+
+  <p>本報告把這段知識整理為一條完整因果鏈：<strong>一半島的地質如何形成（石灰岩大陸）— 二 撞擊如何塑造它的骨架（Chicxulub）— 三 水如何沿著骨架挖出洞與井（喀斯特）— 四 淡水與鹹水如何分層 — 五 這些系統如何被探測與量測 — 六 它今天為何如此脆弱 — 七 它如何養活了馬雅文明。</strong>每一節都標出<strong>證據等級</strong>，依「銘文實據／考古事實／學界推測」的紀律分開呈現，避免把推測講成定論。</p>
+</section>
+<!-- CHAPTER:2 -->
+<section id="c2">
+  <h2>地理與範圍：半島即一塊巨型岩盤</h2>
+  <p>尤卡坦半島是一個<strong>石灰岩平台</strong>，面積約 <strong>165,000 平方公里</strong><sup>B</sup>，涵蓋墨西哥的坎佩切（Campeche）、尤卡坦（Yucatán）、金塔納羅奧（Quintana Roo）三州，以及塔巴斯科（Tabasco）一部份、貝里斯北部與瓜地馬拉佩滕（El Petén）北部。這不僅是墨西哥的問題——它是一個<strong>跨國界（transboundary）含水層</strong>，被三個國家與多個聯邦州共享。</p>
+
+  <h3>一個半島，兩種水文地貌</h3>
+  <table>
+    <tr><th>區域</th><th>地質</th><th>水文特徵</th></tr>
+    <tr><td><strong>北部與沿海平原</strong>（上新世 Pliocene 地質）</td><td>年輕、高滲透的海岸石灰岩</td><td>連續水位、導水能力極高、有清楚的含水層</td></tr>
+    <tr><td><strong>中部丘陵區</strong>（白堊紀 Cretaceous 地質）</td><td>較老、較密實</td><td>地下水呈<span class="tag ds">推測</span>「不連續、分區、可能懸浮（perched）」的含水層，產水不穩定</td></tr>
+  </table>
+
+  <h3>為什麼半島「沒有河流」</h3>
+  <div class="callout">
+    <p>半島地勢平緩（海拔多在 <strong>30 公尺</strong>以下），岩層是<strong>石灰岩／白砂土（sascab）</strong>——碳酸鈣與碳酸鎂，微溶於水。雨水落下來，幾乎不在地表逕流，全部<b>滲透</b>進多孔的石灰岩。<strong>地表沒有河道，所有的淡水都儲存在地下</strong>——這正是馬雅文明把 cenotes 視為生命之源、甚至「通往地下世界（Xibalbá）入口」的地理基礎。<sup>N</sup></p>
+  </div>
+
+  <p><strong>唯一的地表河</strong>在半島南緣：西側的烏蘇馬辛塔河（Río Usumacinta，平均年流量約 1,650 m³/s）與東側的貝里斯河（約 155 m³/s）。這兩條是半島北部「無河」特徵的對比。</p>
+
+  <p class="num">範圍：約 165,000 km² · 海拔多 < 30 m · 95%+ 飲水來自地下水 · 唯一地表河在半島南緣</p>
+</section>
+<!-- CHAPTER:3 -->
+<section id="c3">
+  <h2>地質骨架：石灰岩大陸的誕生</h2>
+  <p>要理解這片地下水，得先理解它所在的地質——用一句話講：<strong>整塊半島是一層「由億萬顆微小海洋生物遺骸堆疊而成」的巨型石灰岩。</strong></p>
+
+  <h3>3.1 碳酸鹽平台：從海底長出來的大陸</h3>
+  <p>現在露出海面的半島，其實只是更大<strong>尤卡坦碳酸鹽平台</strong>的一小塊「出水部分」（整座平台約 <strong>300,000 km²</strong>，水下與露出部分大致相等）。這塊平台是由珊瑚、貝類、有孔蟲等海洋生物，利用碳酸鈣建造牠們的骨骼與外殼，累積、壓實、膠結，歷經<strong>數百萬年</strong>後「長」出來的——換句話說，它不是從海底「浮出」，而是碳酸鹽在海底漸進<strong>增生（accretion）</strong>的產物。<sup>N</sup></p>
+
+  <p>這層石灰岩<strong>厚逾 1,500 公尺</strong><sup>B</sup>，底下是更古老的火成岩與變質岩基盤。地層大致呈<strong>水平、且向半島邊緣漸漸變年輕</strong>——最老的沉積岩約在表面出露的年代，從晚白堊紀一直到全新世。</p>
+
+  <h3>3.2 板塊構造的舞台</h3>
+  <p>半島屬於<b>馬雅地塊（Maya block）</b>，座落在<strong>北美板塊與加勒比板塊交界</strong>附近（交界約在半島南側 200 公里）。發生在晚白堊紀的<b>Chortis 地塊與馬雅地塊碰撞</b>，攪動了南半島的沉積層，形成複雜的推覆構造。這些長期的構造運動，留下了多條<strong>區域尺度斷裂帶</strong>——它們正是地下水流動的「優先通道」。</p>
+
+  <h3>3.3 區域斷裂：水流的「高速公路」</h3>
+  <p>地下水的優先流動路徑（preferential flow paths）跨越三個尺度：</p>
+  <table>
+    <tr><th>尺度</th><th>代表結構</th><th>對地下水的作用</th></tr>
+    <tr><td>區域斷裂帶<br>（10–100 km）</td><td><b>Cenotes 環、Sierrita de Ticul 斷層線、Holbox 斷裂帶、Río Hondo 斷層帶、La Libertad 斷層帶</b></td><td>最強導流——水沿斷裂快速移動，溶蝕優先在此發生<span class="tag ok">實據</span></td></tr>
+    <tr><td>大型溶蝕導管<br>（1–10 km）</td><td>世界最長的水下洞穴系統</td><td>受<strong>紊流（turbulent）</strong>控制，流速高、混雜</td></tr>
+    <tr><td>小型裂縫與溶孔<br>（數十公尺）</td><td>遍佈岩層的微小裂縫</td><td>讓雨水快速下滲、供應植物根</td></tr>
+  </table>
+
+  <div class="callout">
+    <p><strong>關鍵點：</strong>斷裂帶不只讓水「流得快」，更決定了<strong>洞長在哪。</strong>因為溶蝕會沿著這些高滲透的裂縫優先進行。所以整個含水層的形狀，基本上是「<strong>構造骨架</strong>＋<strong>水</strong>」共同雕刻出來的——而這個骨架，很大一部分來自 6600 萬年前的那一次撞擊。</p>
+  </div>
+
+  <p class="num">地質要點：石灰岩厚 > 1,500 m · 碳酸鹽平台 ~300,000 km² · 區域斷裂帶 = 地下水優先通道</p>
+</section>
+<!-- CHAPTER:4 -->
+<section id="c4">
+  <h2>Chicxulub 撞擊：終結恐龍的傷口</h2>
+  <p>在晚白堊紀末期（約 <strong>6600 萬年前</strong>），一顆約 <strong>10 公里直徑</strong>的物體撞上了今日的尤卡坦半島，在墨西哥灣沿岸留下一個埋藏在地下的巨坑——<strong>Chicxulub 隕石坑</strong>。這正是 K-Pg 界線（白堊紀–古近紀）大滅絕、終結非鳥類恐龍的那次撞擊。<sup>B, S</sup></p>
+
+  <h3>4.1 撞擊的規模</h3>
+  <div class="callout warn">
+    <h4>⚠️ 最易講錯的一點：撞擊體是小行星，不是彗星</h4>
+    <p>依國內外常用說法「彗星撞地球滅了恐龍」，學術上並不主流。主流共識是<strong>「約 10 公里的小行星（asteroid）」</strong>——由 Schulte 等人〈2010〉41 位科學家聯合 Review 明確定調，刊於《Science》。「彗星」是 Siraj & Loeb〈2021〉提出的少數假說，未獲普遍採納。</p>
+  </div>
+  <table>
+    <tr><th>說法</th><th>證據等級</th></tr>
+    <tr><td>約 10 km 的小行星</td><td><span class="tag ok">科學共識</span></td></tr>
+    <tr><td>彗星（長週期彗星碎裂體）</td><td><span class="tag myth">少數假說</span>（Siraj & Loeb 2021）</td></tr>
+    <tr><td>撞擊是恐龍滅絕主因</td><td><span class="tag ok">科學共識</span>；但「確切機制／滅絕節奏」含德干火山因素仍討論中</td></tr>
+  </table>
+
+  <p>這個約 <strong>180–200 公里直徑</strong>、具中央峰環（peak-ring）結構的坑，能量相當於上億顆核彈。它把地殼/地函界線上抬了約 2 公里，並在地層中留下<strong>環狀斷裂帶</strong>、放射狀裂縫與黏土質噴射物覆蓋層。今日，坑的輪廓是由一條高密度的天然井帶在地表勾勒出來的——那就是<strong>「Cenotes 環（Anillo de Cenotes）」</strong>。</p>
+
+  <h3>4.2 因果鏈：撞擊留下的「骨架」如何變成洞</h3>
+  <p class="lead"><strong>關鍵校正：撞擊並不是靠「劇烈振動震出一堆洞」。它留下的是「地下的骨架裂縫」，真正的洞是水沿著這道骨架，歷經億萬年溶蝕塌陷出來的。</strong></p>
+
+  <ol>
+    <li><strong>撞擊（遠處原因）</strong> → 衝擊在地殼打出環狀與放射狀<strong>斷裂帶</strong>、抬升地界、留下噴射層。</li>
+    <li><strong>斷裂帶＝优先導流通道</strong> → 地下水優先沿這些裂縫滲透，溶蝕速率遠高於周圍。</li>
+    <li><strong>水沿骨架溶蝕</strong> → 弱酸性地下水溶解石灰岩（化學喀斯特），挖出<strong>洞</strong>。</li>
+    <li><strong>頂板塌陷</strong> → 支撐不住後塌下去，露出水面，成為今天腳下可見的<strong>cenote（天然井）</strong>。</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>一句話結論：裂隙是「路線」，不是「成因」。</strong>撞擊給了藍圖（骨架裂縫），水是施工隊（溶蝕），塌陷開出天窗（cenote）。</p>
+  </div>
+
+  <h3>4.3 別忽略的時間差</h3>
+  <p>撞擊是 <strong>6600 萬年前</strong>，但今天多數能潛水的 cenote，是<strong>最近一次間冰期（≲13 萬年前，MIS5e）</strong>之後才塌出來的。<span class="tag ds">推測</span>原因很簡單：撞擊當下，今天沉積的這層石灰岩<strong>根本還沒存在</strong>。<sup>M</sup></p>
+
+  <div class="callout">
+    <p><strong>導覽可用話術：</strong>「這片半島，地表住著馬雅人，地底埋著 6600 萬年前撞出恐龍滅絕的小行星坑。那次撞擊不是砸出一堆洞，而是在地裏留了一道環狀傷口——地下水流沿著傷口打轉，億萬年後溶蝕塌出今天帶你看的這些天然井。腳下這一整片水，是從星球級災難的遺跡裏慢慢長出來的。」</p>
+  </div>
+
+  <p class="num">Chicxulub：約 6600 萬年前 · 撞擊體 ~10 km 小行星 · 坑 180–200 km 直徑 · Cenotes 環 = 撞擊坑邊緣斷裂帶</p>
+</section>
+<!-- CHAPTER:5 -->
+<section id="c5">
+  <h2>喀斯特與 cenote：骨架如何變成洞</h2>
+  <p>這一章講「<strong>水的施工</strong>」——從一塊石灰岩，到一條能潛的洞穴，再到一個露天的 cenote。核心是<strong>喀斯特（karst）</strong>機制。</p>
+
+  <h3>5.1 溶蝕：弱酸水「吃」石頭</h3>
+  <p>雨水吸收二氧化碳與土壤的 CO₂，形成<strong>弱碳酸</strong>。當它滲進石灰岩（碳酸鈣／碳酸鎂），就開始溶解礦物——這是<strong>化學溶蝕</strong>。石灰岩微溶於水，所以地下水的路徑會<strong>緩慢而持續地擴大</strong>。這是所有洞穴真正的「根」。</p>
+
+  <h3>5.2 洞在哪長：由斷裂「引導」</h3>
+  <p>溶蝕不會平均分佈——它<strong>優先沿著裂縫、斷裂帶與層理面</strong>進行（見第三章）。這就是為什麼「構造骨架」決定「洞的位置」。尤其在鹽淡水混合帶，溶蝕速率最高，因此<strong>洞穴深度往往與鹽躍層（halocline）位置相關聯</strong>——海底線附近的洞穴常位在 10–15 公尺深，向內陸漸深，最深可達約 72 公尺。<sup>B</sup></p>
+
+  <h3>5.3 海平面升降：洞的「乾→濕」史</h3>
+  <p>半島的洞穴不是一直浸在水裡的。在<strong>最後一次冰盛期（約 20,000 年前）</strong>，海平面比現在<strong>低約 120 公尺</strong>，許多今天能潛的 cenote 當時是<strong>乾的</strong>。等到冰河消退、海平面回升（進入全新世），洞穴才被淹沒——這正是「地下洞穴」與「水下洞穴」的演變史。<sup>N</sup></p>
+
+  <h3>5.4 從「洞」到「cenote」：頂板塌陷</h3>
+  <div class="callout">
+    <p><strong>cenote 的定義：</strong>一個與地下水相連、頂板塌陷後<strong>露出水面</strong>的洞穴空間。馬雅語原詞 <em>ts'ono'ot</em>（或 d'zonot），意為「<strong>有水的地方</strong>／儲水之穴」。<strong>如果塌陷後沒到水面，地質上只能叫 dolina（塌陷漏斗），不叫 cenote。</strong></p>
+  </div>
+
+  <h3>5.5 形態分類（策展可用的細節）</h3>
+  <table>
+    <tr><th>類型</th><th>特徵</th></tr>
+    <tr><td>開放式（洞頂全塌）</td><td>露天、如大型水藍色水池，常見於沿海（如 Dos Ojos 一帶）</td></tr>
+    <tr><td>半開放（洞頂部分保留）</td><td>有開口、光綫照入、如半圓穹頂</td></tr>
+    <tr><td>封閉式（洞穴型）</td><td>僅有小開口，內部是洞穴通道（如 Hoyo Negro／Naia 所在地點）</td></tr>
+  </table>
+  <p class="num">喀斯特要點：溶蝕=化學 · 洞沿斷裂長 · 海平面 -120 m 時洞是乾的 · cenote=塌頂露水的洞穴</p>
+</section>
+<!-- CHAPTER:5B -->
+<section id="c5b">
+  <h2>鐘乳石與洞穴沉積物：讀取古水文的「年輪」</h2>
+  <p>洞裡面除了水，還有「滴出來的石頭」——<strong>鐘乳石、石筍、流石</strong>。這些被地質學家統稱為 <strong>speleothem（洞穴沉積物）</strong>，它們是一頁頁<strong>用石頭寫成的古氣候檔案</strong>，正是研究馬雅乾旱最硬的一手證據。</p>
+
+  <h3>5B.1 它們怎麼形成：一滴水的化學</h3>
+  <p>關鍵是一串化學反應：<strong>雨水吸收土壤 CO₂，變成弱碳酸</strong><br><code>H₂O + CO₂ → H₂CO₃</code>。<br>這弱酸水滲過石灰岩（CaCO₃），把它溶解帶走<br><code>CaCO₃ + H₂CO₃ → Ca²⁺ + 2HCO₃⁻</code>。<br>當水抵達洞穴（pCO₂ 較低），溶解的碳酸鈣又<strong>沉澱回來</strong><br><code>Ca²⁺ + 2HCO₃⁻ → CaCO₃ + H₂O + CO₂</code>。</p>
+  <p>水滴從洞頂滴下，一點一點累積——<strong>鐘乳石（stalactite）</strong>從天花板往下長，<strong>石筍（stalagmite）</strong>從地面往上長，兩者相連成<strong>石柱（column）</strong>；沿著洞壁流的水則鋪成<strong>流石（flowstone）</strong>。它們數百、數千年緩慢生長，一年添一層。</p>
+
+  <h3>5B.2 顏色是怎麼來的</h3>
+  <table>
+    <tr><th>顏色</th><th>成因</th></tr>
+    <tr><td>半透明／無色</td><td>高純度碳酸鈣（頂部滲流水乾淨）</td></tr>
+    <tr><td>紅、棕、黃</td><td><strong>鐵氧化物</strong>（地表鐵質被帶進洞穴）</td></tr>
+    <tr><td>黑、深棕</td><td><strong>錳氧化物</strong>，或泥質／粉砂</td></tr>
+    <tr><td>琥珀、黃褐、深棕</td><td><strong>有機質（腐殖酸／黃腐酸）</strong>——來自上方土壤，被滲流水帶入</td></tr>
+  </table>
+
+  <h3>5B.3 地質學家如何「看顏色」判斷歷史水文</h3>
+  <div class="callout">
+    <h4>核心機制：顏色＝地上環境的「底片」</h4>
+    <p>洞裡的沉積物是<strong>從地表「滲」下來的</strong>，所以石筍每一層都記錄了<strong>那一年地表發生的事</strong>：</p>
+    <ul>
+      <li><strong>雨多、土壤活躍</strong> → 有機質＋鐵／錳被帶進洞 → <strong>色深</strong>（暗棕、鐵鏽紅）。</li>
+      <li><strong>乾旱、地表無水</strong> → 有機質輸入減少 → <strong>色淺、偏白</strong>，甚至<strong>生長停滯</strong>（斷層面、空隙）。</li>
+      <li><strong>年層（annual laminae）</strong>：像樹輪，一層一層可數。用<strong>紫外光</strong>照，有機質會<strong>發螢光</strong>——螢光層＝每年濕季的土壤輸入，是讀「季節氣候」的高解析度訊號。</li>
+    </ul>
+  </div>
+  <div class="callout warn">
+    <h4>⚠️ 誠實：顏色只是「第一線」，不是「定論」</h4>
+    <p>肉眼顏色的判斷是<strong>半定量</strong>的「煙霧偵測」——方向對，但不足以單獨下結論。真正精確的古水文重建，要靠實驗室分析：<strong>U–Th 鈾釷定年</strong>（把每一層定到精確年代）、<strong>穩定性氧同位素 δ¹⁸O</strong>（反映降水來源／雨量）、<strong>碳同位素 δ¹³C</strong>（反映上覆是 C3／C4 植被）、以及<strong>微量元素（Mg/Ca、Sr/Ca）</strong>。策展時別把「顏色」講成精準證據，宜說「顏色先看出端倪，同位素定年才確認」。</p>
+  </div>
+
+  <h3>5B.4 實證：馬雅低地的石筍研究（關鍵論文）</h3>
+  <p>這正是「鐘乳石如何改寫馬雅史」的最佳例子——<strong>用石筍讀出乾旱，再用乾旱解釋文明興衰</strong>：</p>
+  <ol>
+    <li><strong>Kennett 等（2012，《Science》）</strong>——分析貝里斯 <strong>Yok Balum 洞穴</strong>一根 2000 年的石筍（Yok-I），以高精度 <strong>U–Th 定年＋δ¹⁸O</strong>，重建出馬雅低地<strong>高解析度、季節級</strong>的降雨史：早期濕潤（農業與城市擴張），之後轉乾，<strong>800–1100 年</strong>接連出現數場「巨型乾旱」。這是最具影響力的石筍古氣候研究之一。</li>
+    <li><strong>Webster 等（2007）</strong>——貝里斯 <strong>Macal Chasm</strong> 石筍，同樣指出前古典廢棄、馬雅間斷期、古典崩潰時期都有<strong>重大乾旱</strong>。</li>
+    <li><strong>尤卡坦本地（Puuc 地區，2026）</strong>——<strong>Columnas 洞穴 HOBO-5 石筍</strong>，測 δ¹⁸O、δ¹³C、δ⁴⁴Ca（1500 年），證實在尤卡坦 Puuc 一帶，<strong>δ¹⁸O 與 δ¹³C 上升正好對應已知的乾旱時段</strong>——這是最貼近奇琴伊察／尤卡坦的一篇。</li>
+    <li><strong>旁證（海洋沉積）</strong>——Haug 等（2003，《Science》）在委內瑞拉 Cariaco 盆地的沉積物，以鈦（Ti）含量重建徑流／降雨，得出<strong>約 810、860、910 年</strong>三場多年度乾旱，精確對應南方城市的廢棄年代——與石筍互相印證。</li>
+  </ol>
+
+  <div class="callout">
+    <p><strong>導覽可用話術</strong>：「我們看到的鐘乳石，不是隨便長的石頭——它是一頁頁『日記』。每一層的深淺，記錄了那一年的雨多還是乾。地質學家把這根石筍切片，用鈾定年、用氧同位素一讀，就讀出了一千多年前馬雅人遭遇的連年大旱——乾旱、欠收、戰爭、城市荒廢。所以一個洞裡的石頭，講的是一整個文明的興亡。」</p>
+  </div>
+  <p class="num">鐘乳石要點：弱酸水溶蝕再沉澱 · 顏色=有機質/鐵錳/泥(地表環境底片) · 年層+螢光=季節氣候 · 精確靠U-Th+同位素 · 石筍讀出馬雅巨型乾旱</p>
+</section>
+
+<!-- CHAPTER:6 -->
+<section id="c6">
+  <h2>水文分層：淡水與鹹水的「地下海洋」</h2>
+  <p>這片含水層不只是一池淡水——它是<strong>淡水（來自雨水）與鹹水（來自海洋）疊在一起</strong>的複雜系統。理解這個分層，才知道為什麼洞口潛水能看到「水下的一條線」。</p>
+
+  <h3>6.1 淡水透鏡：浮在鹹水上的一層「薄殼」</h3>
+  <p>因為<strong>淡水密度較低、鹹水密度較高</strong>，來自雨水的淡水會<strong>浮</strong>在入侵的鹹水之上，形成一片薄薄的「<strong>淡水透鏡（freshwater lens）</strong>」。這層透鏡通常只有<strong>數十公尺</strong>厚（<10–100 m），是半島居民賴以維生的唯一可飲水源。</p>
+
+  <h3>6.2 鹽躍層（halocline）：潛水員看到的那條「線」</h3>
+  <div class="callout">
+    <p><strong>halocline（鹽躍層）</strong>是淡水與鹹水的<strong>分界面</strong>。因為兩者密度不同、折射率不同，水底看起來會有一層<strong>模糊、清澈如鏡</strong>的水平分界——潛水員穿過它時，視線會忽然「糊掉／變清晰」，像穿過一層水簾。這是里維埃拉馬雅潛水最著名的景象。</p>
+    <p>有些 cenote（如 <strong>Cenote Angelita</strong>）的界面不只是模糊，而是一層<strong>厚厚的硫化氫（H₂S）雲</strong>，形成幽暗、詭異的綠色層——非常有拍攝價值。</p>
+  </div>
+
+  <h3>6.3 為什麼鹹水會「入侵」內陸這麼遠</h3>
+  <p>海水入侵這片含水層<strong>達數十公里</strong>內陸。其物理基礎是<strong>Ghyben-Herzberg 原理</strong>：鹽水界面的深度 s 與水頭 h 的關係約為 <code>s = −40·h</code>。由於沿海高滲透區的地下水頭<strong>很低</strong>（水位常僅高於海平面一點點），鹹水就趁機往內陸推。<sup>B</sup></p>
+  <div class="callout warn">
+    <h4>⚠️ Ghyben-Herzberg 有適用限制</h4>
+    <p>這個公式假設地質均勻、界面銳利、穩態。但<strong>洞穴導管的存在會違反這些假設</strong>——在導管區，界面常常不規則、甚至是漸變的。所以實際分界面的形狀，主要由<strong>洞穴通道的形態</strong>控制。引用時別把公式結果當成絕對值。</p>
+  </div>
+
+  <h3>6.4 為什麼內陸對「淡水」格外敏感</h3>
+  <table>
+    <tr><th>現象</th><th>後果</th></tr>
+    <tr><td>海水入侵</td><td>鹹水深入內陸，僅存的淡水透鏡變薄</td></tr>
+    <tr><td>過度抽取</td><td>誘發「鹽水錐升（upconing）」，抽水井被鹹水污染</td></tr>
+    <tr><td>地下水頭極低</td><td>沿海水位常僅高於海平面數公分到數公尺，一點擾動就讓界面移動</td></tr>
+  </table>
+
+  <p class="num">分層要點：淡水(雨水)浮於鹹水(海洋)之上 · 淡水透鏡厚 <10–100 m · 鹹水入侵達數十公里內陸 · halocline = 兩者分界</p>
+</section>
+<!-- CHAPTER:7 -->
+<section id="c7">
+  <h2>兩大系統與「世界最長」之爭</h2>
+  <p>在里維埃拉馬雅（Tulum 一帶），有兩大水下洞穴系統長期爭奪「世界最長」稱號——<strong>Sac Actun</strong> 與 <strong>Ox Bel Ha</strong>。它們正是前面所有地質與水文過程的「最終成品」。</p>
+
+  <h3>7.1 先講一個鐵律：系統＝相連的洞穴網絡</h3>
+  <p>在洞穴學裡，<strong>「系統」（sistema）= 一條彼此相連的洞穴通道</strong>。兩個系統如果某天接通，<strong>大的會「吸收」小的、沿用大系統的名字</strong>。實例就在眼前：</p>
+  <ul>
+    <li><strong>2007</strong> Nohoch Nah Chich → 併入 Sac Actun（吸收）</li>
+    <li><strong>2011</strong> Aktun Hu（+34 km）→ 併入 Sac Actun（吸收）</li>
+    <li><strong>2018</strong> Dos Ojos（84 km）→ 併入 Sac Actun（吸收，Dos Ojos 名稱從此消失）</li>
+  </ul>
+  <div class="callout">
+    <p><strong>所以現在還叫「Sac Actun」和「Ox Bel Ha」兩個名字，恰恰證明它們還沒連通。</strong></p>
+  </div>
+
+  <h3>7.2 兩者的長度：一個「會動」的數字</h3>
+  <table>
+    <tr><th>系統</th><th>目前長度（水下）</th><th>測量時點</th><th>備註</th></tr>
+    <tr><td><strong>Ox Bel Ha</strong><br>（世界第一長）</td><td><span class="num">~541.7 km</span></td><td>2026/02</td><td>逾 160 個 cenotes；曾記 435.8（2023）、524（2025），持續成長</td></tr>
+    <tr><td><strong>Sac Actun</strong><br>（世界第二長）</td><td><span class="num">~378.6 km</span><br>（含乾穴總計約 386.1 km）</td><td>現行</td><td>2018 連接 Dos Ojos 當下宣布 347 km；後續持續延伸</td></tr>
+  </table>
+  <div class="callout warn">
+    <h4>⚠️ 這些數字都不是固定值</h4>
+    <p>兩大系統<strong>從 2007 年起就反覆互換「世界第一」</strong>——誰最新被測量、連接更多通道，誰就暫時領先。所以引用時別把任何單一數字講成永久紀錄。<strong>最安全的說法：</strong>「Ox Bel Ha 目前約 541 公里、世界第一；Sac Actun 約 347–379 公里、世界第二（2018 年連接時曾衝上第一）——兩者多年來互換過世界第一。」</p>
+  </div>
+
+  <h3>7.3 它們不重疊，但共享同一片水</h3>
+  <p>西北大學的水文地質圖說得很明白：<strong>「Tulum 城區正好夾在兩大水下洞穴系統之間」（Sac Actun 與 Ox Bel Ha）。</strong>兩個系統分踞 Tulum 東北與東南，地下通道<strong>互不連通</strong>。</p>
+  <ul>
+    <li><strong>洞穴通道層面：不重疊、不連通</strong> → 所以能各自排名。</li>
+    <li><strong>水體層面：共享同一個大含水層</strong> → 半島無地表河，所有淡水在地下；這正是計畫叫「<strong>大含水層（Gran Acuífero Maya）</strong>」的原因——探的不是一個洞，而是整片相連的水體。</li>
+  </ul>
+
+  <h3>7.4 下一個目標：想把它們打通</h3>
+  <p>連接 Sac Actun + Dos Ojos 後，GAM 明說了——<strong>下一個目標是與也在 Tulum 的另外 3 個系統互連</strong>，其中包括 Ox Bel Ha。若真接通，這些「現在分開」的系統會合併成一個超巨系統，長度數字會再暴增。</p>
+  <p class="num">世界之最：Ox Bel Ha ~541.7 km（第一）· Sac Actun ~347–379 km（第二）· 兩者互換過第一 · 同含水層但通道不連</p>
+</section>
+<!-- CHAPTER:8 -->
+<section id="c8">
+  <h2>GAM 計畫：探索、保護、考古與古生物</h2>
+  <p><strong>馬雅大含水層計畫（Gran Acuífero Maya, GAM）</strong>並不是「一次考古挖掘」，而是一個<strong>多學科的大型地下探測計畫</strong>——目標是<strong>探測並繪製整個半島的「地下水世界」</strong>。</p>
+
+  <h3>8.1 本質與範圍</h3>
+  <ul>
+    <li><strong>主持人</strong>：Guillermo de Anda Alanís（INAH 金塔納羅奧研究員、Nat Geo 探索者）</li>
+    <li><strong>團隊</strong>：近 30 名跨領域專家——考古、地質、生物、水文、天文、傳播、觀光等</li>
+    <li><strong>機構</strong>：INAH、UNAM、National Geographic、Aspen Institute、里維埃拉馬雅科技大學等</li>
+    <li><strong>子計畫</strong>：涵蓋 7 個不同項目（考古／地質／生態／社會層面）</li>
+    <li><strong>技術</strong>：LiDAR 雷射測繪、水下無人機（ROV）、3D 立體建模、專業洞穴潛水</li>
+  </ul>
+  <div class="callout warn">
+    <h4>⚠️ 啟動年份要小心</h4>
+    <p>外文資料常寫「2018 正式啟動」（Hispanopedia 等），但相關報導也指出他「<strong>自 2016 年起執導</strong>」。最穩妥的說法是：<strong>2016 年開始主持、2018 年計畫正式成形並達成關鍵突破</strong>。</p>
+  </div>
+
+  <h3>8.2 它的目標：不只考古</h3>
+  <table>
+    <tr><th>面向</th><th>內容</th></tr>
+    <tr><td><strong>水資源保護</strong></td><td>了解水文地質——供應 <strong>95%+ 半島飲用水</strong>，這是第一優先</td></tr>
+    <tr><td><strong>考古</strong></td><td>水下馬雅遺址、祭儀遺跡，開出水下考古新視野</td></tr>
+    <tr><td><strong>古生物</strong></td><td>更新世滅絕動物</td></tr>
+    <tr><td><strong>大眾意識</strong></td><td>紀錄片《El Gran Acuífero Maya》（TV UNAM 製作）喚醒保護意識</td></tr>
+  </table>
+
+  <h3>8.3 最轟動的成就與發現</h3>
+  <ol>
+    <li><strong>連接 Sac Actun + Dos Ojos（2018/01，10 個月）</strong> → 一度成為<strong>世界最長水下洞穴系統</strong>。這是 GAM 最有新聞性的一刻。</li>
+    <li><strong>更新世滅絕動物</strong> → 在 Sac Actun 的「interaction zones」找到<strong>乳齒象（gonfoterios）、巨型樹懶、古熊</strong>等骨骸，證實這片地下水曾是史前動物與可能人類的活動與保存場域。</li>
+    <li><strong>「Naia」青少年骨骸</strong> → Hoyo Negro 洞穴（Sac Actun 系統內、Tulum 附近）發現約 <strong>12,000–13,000 年前</strong>的青少年——美洲最早人類化石之一。</li>
+  </ol>
+  <div class="callout warn">
+    <h4>⚠️ Naia 的歸屬要說清楚</h4>
+    <p>「Naia」主要由 James Chatters 等團隊透過 Nat Geo 於 2014 發布，<strong>不是 GAM 的專屬成果</strong>。講成「GAM 發現」會失真——宜說「<strong>同一含水層系統內、相關研究發現</strong>」。</p>
+  </div>
+
+  <h3>8.4 與奇琴伊察「崩潰」的關聯</h3>
+  <p>GAM 的地下水研究發現線索：<strong>地層暗示古時曾有乾旱，可能是奇琴伊察衰亡的推力之一</strong>（Reporte Indigo, 2023）。<span class="tag ds">假說</span>這正是演講「Chichén Itzá 在羽蛇神陰影下」會接的梗——他用「地下水、水源、羽蛇神、神聖地理」把奇琴伊察講成「<strong>一座被地下世界撐起、也因水源而傾倒的城市</strong>」。</p>
+  <p class="num">GAM 要點：多學科探測整片含水層 · 主持人 De Anda · 2018 連接兩大系統 · 找到史前動物與 Naia · 關聯奇琴伊察乾旱</p>
+</section>
+<!-- CHAPTER:9 -->
+<section id="c9">
+  <h2>脆弱性與污染：喀斯特的阿基里斯腱</h2>
+  <p>這片含水層之所以珍貴，也正因為它<strong>極度脆弱</strong>。喀斯特的「高滲透、無自淨、連通性強」特性，讓它成了污染面前最脆弱的淡水系統之一。</p>
+
+  <h3>9.1 為什麼「沒有自淨能力」</h3>
+  <ul>
+    <li><strong>無地表河道</strong>：半島沒有河流、溪流，<strong>污水幾乎只能回灌進含水層</strong>，或直接排入 cenote／湖。</li>
+    <li><strong>高滲透性</strong>：水太快滲進地下，超過一半的污水<strong>在處理前就排掉</strong>——只有約 <strong>1/3 的污水被處理</strong>後才排放。<sup>B</sup></li>
+    <li><strong>連通性</strong>：斷裂帶與導管快速傳輸，<strong>污染可擴散到很遠而幾乎不衰減</strong>。</li>
+  </ul>
+
+  <h3>9.2 關鍵脆弱性案例</h3>
+  <table>
+    <tr><th>地點／案例</th><th>問題</th></tr>
+    <tr><td><strong>Mérida（尤卡坦州首府）</strong></td><td>淡水透鏡僅約 <span class="num">60 公尺</span>厚；因化糞池污染，<strong>上層 20 公尺</strong>已不適合飲用——<strong>約 1/3 潛在水源已流失</strong>。<sup>B</sup></td></tr>
+    <tr><td><strong>Riviera Maya 旅遊帶</strong></td><td>大規模觀光開發 → 污水與固體廢棄物暴增，缺乏污水處理規範；垃圾掩埋場在這種高滲透喀斯特區特別危險。</td></tr>
+    <tr><td><strong>海水入侵</strong></td><td>鹹水深入內陸，僅存的淡水透鏡變薄。</td></tr>
+    <tr><td><strong>硝酸鹽污染</strong></td><td>大量鑽孔井被測得硝酸鹽升高，源自農業與當地污水（Pacheco 等）。</td></tr>
+  </table>
+
+  <h3>9.3 為什麼這對「整個生態」都致命</h3>
+  <p>這片水不只養人，也養<strong>濕地、雨林、與全球最大珊瑚礁系統之一</strong>。其中最重要的依賴地下水生態系統是 <strong>Sian Ka'an 生物圈保護區</strong>（約 6,510 km²，Ramsar 濕地公約＋UNESCO 世界遺產）。如果含水層被污染或過度抽取，會連鎖衝擊沿海生態與觀光命脈。</p>
+
+  <div class="callout">
+    <p><strong>一句話：</strong>喀斯特含水層是「<strong>一條地下水高速公路</strong>」——車（污染）開進去，會一路衝到底，幾乎不留下過濾痕跡。保護 = 在漏洞（高滲透斷裂帶）還沒被塞進污染之前劃出保護區。</p>
+  </div>
+  <p class="num">脆弱性要點：無地表河 · 污水多回灌地下 · 2/3 污水未處理 · Mérida 淡水透鏡上 20 m 已污染 · 高滲透區污染不衰減</p>
+</section>
+<!-- CHAPTER:10 -->
+<section id="c10">
+  <h2>馬雅與水：文明的命脈</h2>
+  <p>最後一層，把這套地質與水文的故事，拉回它最關鍵的「使用者」——<strong>馬雅文明</strong>。因為半島無地表河，水是馬雅人「生存與信仰」的絕對核心。</p>
+
+  <h3>10.1 cenote：既是水井，也是「通往地下世界的大門」</h3>
+  <ul>
+    <li><strong>水源</strong>：旱季可長達 6 個月，地表留不住水——cenote 是<strong>唯一可靠飲水來源</strong>。</li>
+    <li><strong>信仰</strong>：對古代馬雅而言，cenote／洞穴是通往<strong>地下世界 Xibalbá（地獄）</strong>的入口、與神祇溝通的場域。馬雅語原詞 <em>ts'ono'ot</em>「儲水之穴」。</li>
+    <li><strong>祭儀</strong>：獻祭與祭祀常以 cenote 為場域——最著名的是<strong>奇琴伊察神聖井</strong>。</li>
+  </ul>
+
+  <h3>10.2 神聖井＝地質與信仰的結合點</h3>
+  <p>奇琴伊察的<strong>神聖井（Cenote Sagrado）</strong>正是地質＋信仰的完美交會。研究者（如 De Anda）從這裡的遺骸與造物，重建出祭儀與信仰——<span class="tag ok">實據</span>在井中與洞穴內發現<strong>人為建築改造</strong>（牆、通道導向水體），證明殖民文獻所載的祭儀在物質上有連續性。</p>
+  <div class="callout warn">
+    <h4>⚠️ 「獻祭動機」是假說，不是定論</h4>
+    <p>De Anda 重新分析神聖井骨骸時發現，<strong>獻祭者 80% 以上是 3–11 歲兒童</strong>（非傳說中的「年輕美女」）——這點是<strong>實據</strong>。但他提出的「這些兒童可能<strong>本已死亡、獻祭以尊嚴化其死亡</strong>」則<span class="tag ds">是假說</span>——學界另有求雨（Chaac 雨神）、戰爭俘虜等解釋。策展與導覽引用時務必標成「學者觀點」。<sup>N</sup></p>
+  </div>
+
+  <h3>10.3 水與文明的興衰</h3>
+  <p>馬雅人清楚水的脆弱——大型城市往往「依 cenote 而建」，並做了大量<strong>水利工程</strong>（蓄水、濕地灌溉）確保供水。<sup>B</sup>而切切言之，<strong>古典馬雅文明的衰落</strong>（約 750–900 年）也常被連結到<strong>水文極端事件</strong>——乾旱。<span class="tag ds">假說</span></p>
+
+  <div class="callout">
+    <p><strong>把這一切串起來的口袋話術：</strong>「馬雅人不是隨便挑地方蓋城市——他們挑有水源的地方。半島沒有河，所以他們圍著天然井蓋城、圍著地下世界打轉。今天我們透過 GAM 看到地底那片水，才知道這座城雖然被地下的水撐起來，也可能因為水沒了而傾倒。地表是文明，地底是這片文明的命脈與秘密。」</p>
+  </div>
+  <p class="num">馬雅要點：cenote=水源＋地下世界入口 · 神聖井=地質與信仰交會 · 獻祭骨 80% 兒童(實據)but 動機=假說 · 乾旱連結文明衰落</p>
+</section>
+<!-- CHAPTER:11 -->
+<section id="c11">
+  <h2>證據等級總表</h2>
+  <p>依「考古／科學實據 vs 學界推測」紀律，把本報告所有關鍵斷言分級，方便你在策展與導覽時決定語氣。</p>
+  <table>
+    <tr><th>斷言</th><th>等級</th></tr>
+    <tr><td>含水層供應 95%+ 半島飲用水；半島無地表河</td><td><span class="tag ok">事實</span></td></tr>
+    <tr><td>Chicxulub 撞擊（約 6600 萬年前）是恐龍滅絕主因</td><td><span class="tag ok">科學共識</span>（Schulte 2010）</td></tr>
+    <tr><td>撞擊體是約 10 km 小行星（不是彗星）</td><td><span class="tag ok">主流</span></td></tr>
+    <tr><td>撞擊體是彗星</td><td><span class="tag myth">少數假說</span>（Siraj & Loeb 2021）</td></tr>
+    <tr><td>Cenotes 環與撞擊坑邊緣斷裂帶相關</td><td><span class="tag ok">學術支持</span></td></tr>
+    <tr><td>撞擊「直接震出一堆洞」</td><td><span class="tag myth">錯誤</span>——應表述為「撞擊留骨架 → 水溶蝕 → 塌陷」</td></tr>
+    <tr><td>現代 cenote 多為 ≲13 萬年前塌成</td><td><span class="tag ds">推測</span>（MIS5e 間冰期）</td></tr>
+    <tr><td>Ox Bel Ha ~541.7 km（世界第一）／Sac Actun ~347–379 km（第二）</td><td><span class="tag ok">最新實測</span>（2026/02；會變動）</td></tr>
+    <tr><td>兩系統同含水層但洞穴通道不連</td><td><span class="tag ok">學術資料</span></td></tr>
+    <tr><td>神聖井獻祭者 80%+ 為 3–11 歲兒童</td><td><span class="tag ok">實據</span></td></tr>
+    <tr><td>「兒童已死、獻祭以尊嚴化死亡」</td><td><span class="tag ds">De Anda 假說</span></td></tr>
+    <tr><td>乾旱導致奇琴伊察／古典馬雅衰落</td><td><span class="tag ds">假說</span></td></tr>
+  </table>
+</section>
+
+<!-- CHAPTER:12 -->
+<section id="c12">
+  <h2>來源與延伸閱讀</h2>
+  <p>本報告事實主要取材自下列權威來源，依重要性排列。</p>
+  <div class="src"><strong>[B]</strong> Bauer-Gottwein P, Gondwe BRN, Charvet G, Marín LE, Rebolledo-Vieyra M, Merediz-Alonso G (2011). <em>Review: The Yucatán Peninsula karst aquifer, Mexico</em>. Hydrogeology Journal. <a href="https://www.amigosdesiankaan.org/wp-content/uploads/2021/12/HJ_Yucatan_Review.pdf">PDF</a> — 半島喀斯特含水層的權威學術綜述（地質、水文、淡水透鏡、污染、管理）。</div>
+  <div class="src"><strong>[N]</strong> Monroy-Ríos E. — Karst Geochemistry and Hydrogeology（西北大學）。<em>Sistema Sac Actun</em>、<em>Espeleogénesis</em>、<em>El anillo de cenotes</em> 等頁面。含 Kambesis & Coke (2016) 引用。 <a href="https://sites.northwestern.edu/monroyrios/">連結</a></div>
+  <div class="src"><strong>[S]</strong> Schulte P. et al. (2010). <em>The Chicxulub Asteroid Impact and Mass Extinction at the Cretaceous-Paleogene Boundary</em>. Science. — 恐龍滅絕＝小行星撞擊的科學共識。</div>
+  <div class="src"><strong>[W]</strong> Wikipedia（西文/英文）：<em>Sistema Sac Actun</em>、<em>Sistema Ox Bel Ha</em>、<em>Cenote</em> — 長度數據（2026/02 Ox Bel Ha 541.7 km）與 cenote 定義。</div>
+  <div class="src"><strong>[G]</strong> 馬雅大含水層計畫（Gran Acuífero Maya, GAM）／Guillermo de Anda Alanís — INAH、UNAM、National Geographic、Aspen Institute 等機構相關報導與官方資料。</div>
+  <div class="src"><strong>[M]</strong> Milenio/Sipse（2018）訪談 — De Anda 的養成、350+ cenotes、GAM 成就。</div>
+  <div class="src"><strong>[L]</strong> Lunar and Planetary Institute（Kring 團隊）— Chicxulub 撞擊坑的發現歷程與 peak-ring 結構。</div>
+  <div class="src"><strong>延伸</strong>：Xataka México（GAM 連接目標）、Reporte Indigo（奇琴伊察乾旱關聯）、France24 / El País / CNN（2018 連接 347 km）、Ramsar（Anillo de Cenotes）。</div>
+  <div class="src"><strong>[SP]</strong> 鐘乳石／古氣候（第 5B 章）：Kennett 等 (2012)《Science》— 貝里斯 Yok Balum 石筍 YOK-I（U–Th + δ¹⁸O，2000 年降雨史，800–1100 巨型乾旱）；Webster 等 (2007)— 貝里斯 Macal Chasm 石筍；Haug 等 (2003)《Science》— Cariaco 盆地沉積（Ti，約 810/860/910 年乾旱）；尤卡坦 Puuc 區 Columnas 洞穴 HOBO-5 石筍（δ¹⁸O/δ¹³C/δ⁴⁴Ca，1500 年，2026）。洞穴沉積物定義與顏色機制：Wikipedia <em>Speleothem</em>。</div>
+</section>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <h3>來源與延伸閱讀</h3>
+  <div id="sources"><p class="src">註解：正文中的上標（如 <sup>B</sup>、<sup>N</sup>、<sup>S</sup>）對應上方第 12 章的來源標記。本報告為知識儲備用途，可依需要刪減或擴充。</p></div>
+</footer>
+
+</div>
+</body>
+</html>
