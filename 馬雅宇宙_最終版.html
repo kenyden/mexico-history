@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>馬雅宇宙：太陽、月亮、星辰與生命</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=Noto+Serif+TC:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Noto Sans TC', sans-serif;
+    background: #f9f6f0;
+    color: #2c2418;
+    line-height: 2;
+    font-size: 16px;
+  }
+  .hero {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+    color: #f5e6c8;
+    padding: 80px 20px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero h1 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 2.4em;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 12px;
+  }
+  .hero .sub {
+    font-size: 1em;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+  .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+  .chapter-header {
+    text-align: center;
+    margin: 60px 0 30px;
+    padding: 30px 0;
+    border-top: 2px solid #d4a36a;
+    border-bottom: 2px solid #d4a36a;
+  }
+  .chapter-header h2 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.8em;
+    color: #8b4513;
+    margin-bottom: 8px;
+    letter-spacing: 3px;
+  }
+  .chapter-header .eng {
+    font-size: 0.85em;
+    color: #a08060;
+    letter-spacing: 1px;
+  }
+  .chapter-number {
+    display: inline-block;
+    background: #8b4513;
+    color: #f5e6c8;
+    padding: 2px 16px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .section-header {
+    margin: 48px 0 24px;
+    padding: 12px 0;
+    border-bottom: 2px solid #d4a36a;
+  }
+  .section-header h3 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.35em;
+    color: #5a3a1a;
+    letter-spacing: 1px;
+  }
+  .subsection {
+    margin: 32px 0 16px;
+  }
+  .subsection h4 {
+    font-family: 'Noto Serif TC', serif;
+    font-size: 1.1em;
+    color: #6b4c2a;
+    letter-spacing: 1px;
+  }
+  p { margin-bottom: 16px; text-align: justify; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.93em;
+  }
+  th, td {
+    border: 1px solid #d4a36a;
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th { background: #e8ddd0; font-weight: 600; color: #5a3a1a; }
+  td { background: #fefcf8; }
+  blockquote {
+    background: #efe6d8;
+    padding: 16px 20px;
+    border-radius: 6px;
+    margin: 16px 0;
+    font-style: italic;
+    color: #6b4c2a;
+    border-left: 4px solid #c49a6c;
+  }
+  blockquote p { margin-bottom: 6px; }
+  .highlight-box {
+    background: #f0e6d0;
+    padding: 20px 24px;
+    border-radius: 8px;
+    border-left: 4px solid #c49a6c;
+    margin: 24px 0;
+  }
+  .vision-card {
+    background: #fefcf8;
+    border: 1px solid #d4a36a;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 16px 0;
+  }
+  .vision-card h5 {
+    font-family: 'Noto Serif TC', serif;
+    color: #8b4513;
+    margin-bottom: 8px;
+    font-size: 1em;
+  }
+  hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #d4a36a, transparent);
+    margin: 40px 0;
+  }
+  strong { color: #8b4513; }
+  ul { margin: 12px 0 20px 24px; list-style: none; }
+  ul li { position: relative; padding-left: 22px; margin-bottom: 6px; }
+  ul li::before { content: '✦'; position: absolute; left: 0; color: #c49a6c; font-size: 0.7em; top: 5px; }
+  .design-note {
+    background: #e8ddd0;
+    padding: 20px 24px;
+    border-radius: 8px;
+    margin: 20px 0;
+  }
+  .design-note strong { color: #5a3a1a; }
+  .key-point {
+    background: #2c2418;
+    color: #f5e6c8;
+    padding: 24px 28px;
+    border-radius: 8px;
+    margin: 24px 0;
+  }
+  .key-point strong { color: #e8b870; }
+  .comp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 20px 0;
+  }
+  .comp-item {
+    background: #fefcf8;
+    border: 1px solid #d4a36a;
+    border-radius: 8px;
+    padding: 16px 20px;
+  }
+  .comp-item h5 { color: #8b4513; margin-bottom: 6px; font-size: 0.95em; }
+  .comp-item p { font-size: 0.9em; margin-bottom: 0; }
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 1.6em; }
+    .container { padding: 0 16px; }
+    .comp-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="hero">
+  <h1>馬雅宇宙</h1>
+  <p class="sub">太陽、月亮、星辰與生命<br>從創世神話到天文觀測，從玉米田到宇宙秩序</p>
+</div>
+<div class="container">
+
+<!-- 開場 -->
+<div class="chapter-header">
+  <div class="chapter-number">序</div>
+  <h2>當第一個太陽升起</h2>
+  <p class="eng">The First Dawn</p>
+</div>
+
+<p>在馬雅人的世界裡，宇宙不是一個存在於頭頂上方的抽象空間——它就是生命本身。是每天的日出日落，是每個雨季的到來與離去，是每一粒種子經歷死亡後重新發芽，是每一口食物進入身體後化為血肉。</p>
+
+<p>馬雅人從來不認為自己站在自然之外。他們是宇宙秩序的一部分——就像叢林中的 Ceiba 樹一樣，枝葉伸展向天空，根部深入冥界。</p>
+
+<p>這篇文章要說的故事，就是這個宇宙觀如何在每一天、每一片田、每一座金字塔中被具體地活出來。</p>
+
+<!-- 一 -->
+<div class="section-header">
+  <h3>一、創世——從黑暗水域到世界的秩序</h3>
+</div>
+
+<p>世界開始於寂靜的黑暗水域。沒有太陽，沒有月亮，沒有大地——眾神「天空之心」（Huracán）與「羽蛇神」（Kukulcán）靜靜躺在青藍與虹彩色的羽毛之中。</p>
+
+<p>眾神攪動黑暗，呼喚大地——大地從深淵升起。眾神先確立了四個方位：北、南、東、西。然後，第一座山從水中自行長出。</p>
+
+<p>在聖書《波波爾·武》（Popol Vuh）中，眾神三次嘗試創造人類——第一次用泥土，一遇水便崩解；第二次用木頭，僵硬空洞缺乏靈魂；第三次，眾神以玉米團塑造了人類。這一次，人類終於成形，因為玉米本身就是神聖的生命物質。</p>
+
+<p>當第一個太陽升起，祖先們從黑暗中走出，讚頌這道光芒。這是時間的起點。</p>
+
+<div class="subsection">
+<h4>三層宇宙與世界樹</h4>
+<p>宇宙分三層。上層是十三重天（Oxlahuntiku），眾神的居所，日月星辰在其中運行。中層是大地（Kab），人類居住的世界。下層是西巴巴（Xibalbá），九層冥界，死亡之神與疾病的領地。</p>
+<p>這三層由一棵巨大的神樹貫穿——吉貝樹（Ceiba / Yaxché），稱為 Wakah-Chan（「豎立之天」）。它的枝葉觸及第十三重天，樹幹穿行人間，根部深入西巴巴九層。Ceiba 的形象出現在帕倫克十字神廟的浮雕中、科潘的石碑上、馬德里手抄本的圖畫裡。真實的叢林中，Ceiba 可以長到 70 公尺高——任何人走進瑪雅叢林，一眼就能理解為什麼這棵樹被視為連接天地的軸心。</p>
+</div>
+
+<div class="subsection">
+<h4>四方宇宙</h4>
+<p>除了垂直的三界，還有水平的四方位結構，每一個方位有自己的顏色與象徵：</p>
+<table>
+  <tr><th>方位</th><th>顏色</th><th>象徵</th></tr>
+  <tr><td>東方（Lak'in）</td><td>紅</td><td>日出、生命、誕生</td></tr>
+  <tr><td>西方（Chik'in）</td><td>黑</td><td>日落、死亡、冥界入口</td></tr>
+  <tr><td>北方（Xaman）</td><td>白</td><td>祖先、天空</td></tr>
+  <tr><td>南方（Nohol）</td><td>黃</td><td>太陽右側、玉米成熟</td></tr>
+  <tr><td>中央</td><td>綠/藍</td><td>世界樹、軸心</td></tr>
+</table>
+<p>這不是抽象符號。它決定了馬雅城市的規劃、建築的定向、儀式空間的布局。奇琴伊察庫庫爾坎金字塔的四道階梯，就是這個宇宙觀在石頭上的具體刻畫。</p>
+</div>
+
+<!-- 二 -->
+<div class="section-header">
+  <h3>二、太陽、月亮與時間的誕生</h3>
+</div>
+
+<div class="subsection">
+<h4>英雄雙子——成為太陽與月亮的傳說</h4>
+<p>在《波波爾·武》中，英雄雙子胡納普（Hunahpú）與斯巴蘭克（Xbalanqué）的故事，是馬雅文明最重要的敘事之一。</p>
+<p>英雄雙子被冥界之神挑戰，進入西巴巴進行一場生死球賽。他們穿越獅子屋、蝙蝠屋、刀刃屋與寒冰屋——九層試煉。最後，他們犧牲自己，然後復活，擊敗死亡之神。他們找到了父親被懸掛在球場邊的頭顱，讓頭顱重新與身體結合——父親因而重生，成為玉米之神（Hun Nal Ye）。</p>
+<p>完成使命後，英雄雙子升上天空，成為太陽與月亮。</p>
+<p>這個神話回答了馬雅文明最核心的問題：為什麼太陽每天升起又落下？為什麼月亮有盈虧？為什麼玉米經歷死亡（播種）後重生（發芽）？——因為宇宙本身就是生命、死亡、重生這個循環的展現。</p>
+</div>
+
+<div class="subsection">
+<h4>從神話到天文觀測</h4>
+<p>日出標記一天的開始。日落標記一天的結束。月亮盈虧讓人類理解更長的週期。</p>
+<p>馬雅天文學的起源不是複雜的數字計算，而是日復一日、年復一年的地平線觀察。最早的證據不在奇琴伊察，而在瓜地馬拉叢林深處的瓦哈克通（Uaxactún）。</p>
+<p>1924年，考古學家發現了一座 E 組建築群（Group E），年代可追溯至公元前300年。西側一座金字塔作為觀測點，東側三座小型建築分別對齊春分/秋分日出（正中央）、夏至日出（最北側）、冬至日出（最南側）。站在西側階梯上，就能在一年中精確判斷太陽位置、預測季節轉變。</p>
+<p>一個文明開始用建築來捕捉天空。之後一千多年，這個原型發展成奇琴伊察的卡拉科爾天文台與庫庫爾坎金字塔。</p>
+</div>
+
+<!-- 三 -->
+<div class="section-header">
+  <h3>三、玉米的馴化——人類史上最驚人的植物改造</h3>
+</div>
+
+<p>玉米的起源，是人類農業史上最不可思議的故事。因為今天的玉米，與它的野生祖先幾乎沒有任何相似之處。</p>
+
+<p>玉米的野生祖先叫作大芻草（teosinte，Zea mays ssp. parviglumis），至今仍生長在墨西哥中南部。它不像玉米——更像一株稀疏的野草，每株有許多分枝，每個分枝末端只有 2 到 12 粒堅硬的種子，每粒包在硬殼裡。今天的玉米一穗有 400 到 600 粒種子。</p>
+
+<p>從大芻草到玉米，經歷了至少兩次關鍵的基因突變，以及數千年的選擇：</p>
+
+<table>
+  <tr><th>基因</th><th>功能</th><th>改變結果</th></tr>
+  <tr><td><strong>tb1</strong>（teosinte branched 1）</td><td>控制植物分枝結構</td><td>多分枝野草 → 單主莖、單一大型果穗</td></tr>
+  <tr><td><strong>tga1</strong>（teosinte glume architecture 1）</td><td>控制種子外殼硬度</td><td>堅硬外殼 → 裸露種子，可直接食用加工</td></tr>
+</table>
+
+<p>這些突變不是偶然發生的。它們是古代中美洲農民數千年審慎選擇的結果。每一代，人們選擇留下最大的種子、最飽滿的果穗、最容易去殼的變異個體。經過數千年的積累，大芻草變成了玉米——一種需要人類幫忙才能繁殖的作物，因為它的種子緊密包裹在玉米芯上，無法自然散播。</p>
+
+<p>馴化始於約 9,000 年前，發生在墨西哥南部的巴爾薩斯河河谷（Balsas River Valley）。從這裡開始，玉米的種子被人類帶向南北——從加拿大南部的易洛魁聯盟到安地斯山脈的印加帝國。但所有玉米的基因，都可以追溯到巴爾薩斯河谷的那一片野草地。</p>
+
+<p>對馬雅人而言，玉米不僅是他們種植的作物——它是他們理解世界的根本框架。玉米的馴化過程——種子入土、死亡、發芽、成長、結果、收成——本身就是馬雅宇宙觀中「死亡與重生」循環的物質基礎。</p>
+
+<!-- 四 -->
+<div class="section-header">
+  <h3>四、捕捉太陽的建築——奇琴伊察的天文裝置</h3>
+</div>
+
+<div class="subsection">
+<h4>庫庫爾坎金字塔（El Castillo）</h4>
+<p>奇琴伊察最著名的建築本身就是一座天文日曆。九層階梯平台代表西巴巴的九層冥界。四道階梯各九十一級，加上頂端平台共三百六十五級——哈布曆一年的天數。</p>
+<p>每年春分（3月20日）與秋分（9月22日）的傍晚，夕陽在北面階梯稜角上形成一條蜿蜒的蛇形光影，沿階梯向下滑動約三十四分鐘，最終與塔底的羽蛇神蛇頭石雕相接。這不是裝飾——這是建築、天文、神話與政治權力的完美整合。在特定的日期，由太陽、建築與圍觀的群眾共同完成一場宇宙級的公共儀式。</p>
+</div>
+
+<div class="subsection">
+<h4>卡拉科爾（El Caracol）——蝸牛天文台</h4>
+<p>在主廣場以南，矗立著一座不尋常的圓形建築。西班牙人稱之為 El Caracol（「蝸牛」），因為內部有螺旋階梯。對馬雅人而言，這是一座天文觀測站。</p>
+<p>它的正面大階梯指向北偏西 27.5 度——幾乎完美對齊金星在天空中的最北端位置。上層塔樓的窗口對齊夏至日落、金星最北端與最南端、春分與秋分、月球大停頓。馬雅人稱金星為 Chak Ek'（「巨大的星辰」），金星作為晨星出現時被視為戰爭之星——著名的「星辰戰爭」正是與金星出現同步發動的攻擊。</p>
+<p>馬雅人精確計算了金星的運行週期：583.92 天。德勒斯登手抄本中保存的金星表覆蓋五百多年，誤差極小。</p>
+</div>
+
+<div class="subsection">
+<h4>太陽天頂——熱帶文明獨有的經驗</h4>
+<p>在奇琴伊察（北緯 20.68 度），每年有兩個日子太陽會到達頭頂正上方：5 月 26 日前後，標示雨季開始；7 月 20 日前後，標示收穫時節。在那一刻，正午的陽光照在地面上不產生任何影子，天空與大地彷彿垂直相接。</p>
+<p>對生活在溫帶的人來說，春分、秋分、夏至、冬至是主要的季節標記。但對熱帶文明而言，太陽天頂同樣重要——因為那一刻，人站在宇宙的軸心之下。</p>
+</div>
+
+<!-- 五 -->
+<div class="section-header">
+  <h3>五、土地的生命——從玉米田到棉花田</h3>
+</div>
+
+<div class="subsection">
+<h4>Milpa——三姊妹共生</h4>
+<p>馬雅農民發展出一套極其成熟的混作系統——米爾帕（milpa）。核心是玉米、豆類與南瓜三種作物——稱為農業三姊妹。</p>
+<p>玉米提供豆類攀爬的支架。豆類將大氣中的氮固定到土壤中，供玉米和南瓜吸收。南瓜的寬大葉片覆蓋地面，抑制雜草、保持土壤濕度。這不是巧合，而是數千年觀察與實驗的結果。從營養學來看，這三種作物合在一起提供了完整的蛋白質——在熱帶低地動物蛋白質不足的條件下，支撐了數百萬城市人口。</p>
+<p>其他作物還包括：可可（Kakaw，用作貨幣與儀式飲料）、酪梨、人心果、辣椒、樹薯（cassava）、甘藷、莧籽、恰雅（chaya）、龍舌蘭、香草等等。在城市周邊的森林花園中，上百種植物被管理，形成模仿自然森林結構的人造生態系統。</p>
+</div>
+
+<div class="subsection">
+<h4>棉花——改變世界的纖維</h4>
+<p>在馬雅人的作物中，有一種不像玉米那樣直接養活人口，但對人類文明的影響力同樣巨大：棉花。馬雅語稱之為 Taman。</p>
+<p>馬雅人種植的陸地棉（Gossypium hirsutum）原產於墨西哥南部，是全世界四個棉花馴化中心之一。今日全球棉花產量的百分之九十以上來自這個品種——你身上穿的每一件純棉衣物，根源都在這裡。</p>
+<p>馬雅社會中，女性使用背帶織機（backstrap loom）紡織，工藝水準決定了她們的社會地位。棉織品（mantas）是馬雅世界最重要的貿易商品之一，甚至被用作貨幣。馬雅人還發展出成熟的天然染色技術——胭脂蟲紅（cochineal）、靛藍（indigo）、胭脂樹果（achiote）——這些染料後來傳遍全世界。</p>
+<p>馬雅紡織女神伊希切爾（Ix Chel），同時也是月亮、醫藥與豐收女神。她的形象常與紡織工具一同出現——紡織不僅是工藝，更是神聖的創造行為。</p>
+</div>
+
+<div class="subsection">
+<h4>參與宇宙循環的日常實踐</h4>
+<p>對馬雅農民來說，走進 milpa 田不是在工作，而是在參與一個與創世神話同構的循環：</p>
+<p>翻土清地 = 混沌中開闢秩序。播種 = 種子進入冥界。雨水喚醒 = 眾神的回應。發芽 = 穿越死亡後的第一道生機。成長 = 太陽的力量賦予生命。收成 = 宇宙循環的完成。食用 = 宇宙秩序進入人類身體，玉米化為血肉。</p>
+<p>每一次耕種，都是創世神話的重演。種玉米與祭神是同一件事。一個人站在玉米田中，與一個人站在金字塔前——他在做的，是同一件事。</p>
+</div>
+
+<div class="subsection">
+<h4>農業時間——從太陽到農事</h4>
+<p>馬雅農業完全依賴天文觀察決定農事時機：</p>
+<table>
+  <tr><th>時間</th><th>農事活動</th><th>天文標記</th></tr>
+  <tr><td>1-2月</td><td>清除雜木</td><td>太陽位置判斷乾季</td></tr>
+  <tr><td>3-4月</td><td>焚燒雜木</td><td>春分前後</td></tr>
+  <tr><td>5月</td><td>播種玉米</td><td>第一次太陽天頂（5/26）</td></tr>
+  <tr><td>6-7月</td><td>第一次除草</td><td>夏至前後</td></tr>
+  <tr><td>7月</td><td>第二次太陽天頂（7/20）</td><td>播種秋季作物</td></tr>
+  <tr><td>8-9月</td><td>第二次除草</td><td>觀察太陽位置</td></tr>
+  <tr><td>10-12月</td><td>收成</td><td>秋分後至冬至</td></tr>
+</table>
+<p>掌握天空知識的人，才能預測雨季。預測雨季的人，才能安排農業。安排農業的人，才能養活城市。</p>
+</div>
+
+<!-- 六 -->
+<div class="section-header">
+  <h3>六、曆法——時間成為活生生的秩序</h3>
+</div>
+
+<p>馬雅人對時間的理解，與現代人有本質的差異。英國學者 J. Eric S. Thompson 曾這樣解釋：馬雅人將時間的各個區段視為一種負擔，由一連串的背負者接力穿越永恆——不是一個背負者和他的一個包袱，而是許多背負者，每個人背負著屬於自己的時間單位。時間不是被守護的，時間是被扛著走的。</p>
+
+<p>這個觀念在科潘遺址的 Stela D 上被刻畫出來：背負時間包裹的神像，以頭帶固定背上的時間單位。當一個時間單位完成，背負者把包裹交給下一位——一場宇宙級的接力賽。</p>
+
+<div class="subsection">
+<h4>三套曆法</h4>
+<p><strong>卓爾金曆（Tzolk'in）——260 天神聖曆。</strong>由十三個數字與二十個日名組合，用於宗教儀式、占卜吉凶、命名與婚嫁。為什麼是 260 天？學術界有幾種說法：人類孕期約九個陰曆月、金星週期的一半、玉米從播種到收成約 260 天。無論原因為何，Tzolk'in 是馬雅儀式生活的核心——現代馬雅人稱之為「宇宙的脈搏」。</p>
+<p><strong>哈布曆（Haab'）——365 天太陽曆。</strong>十八個月每月二十天，加上年尾五天的「無名之日」（Wayeb'）。這五天被視為危險的過渡期——維持宇宙秩序的界線暫時鬆弛，等待新的一年開始。</p>
+<p><strong>長計曆（Long Count）。</strong>以 Kin（一天）為起點，二十進位體系向上累積。起點為公元前 3114 年 8 月 11 日——馬雅人認定的創世日期。一個完整的長計曆週期約 5,125 年，終結於 2012 年 12 月 21 日。這不是世界末日，而是一個週期的完成與新週期的開始。</p>
+</div>
+
+<div class="subsection">
+<h4>曆法輪——52年的宇宙更新</h4>
+<p>Tzolk'in 與 Haab' 的最小公倍數是 18,980 天——約五十二年。這就是曆法輪（Rueda Calendárica）。每五十二年，兩個曆法回到同步的起點，以盛大的新火儀式慶祝宇宙的重生。</p>
+</div>
+
+<div class="subsection">
+<h4>零與德勒斯登手抄本</h4>
+<p>馬雅人在公元 400 年左右獨立發明了零的概念——這是人類數學史上最重要的發明之一，全世界只有少數文明獨立做到。馬雅人的數系是二十進位，僅用三種符號：點（1）、橫槓（5）、貝殼（0）。</p>
+<p>西班牙征服時，數萬冊馬雅手抄本被焚毀。德勒斯登手抄本是少數倖存者之一，它包含的金星表計算了五百多年的金星週期——這些數據的精確度證明馬雅天文學是建立在數百年持續觀測基礎上的經驗科學，不是單純的占星。</p>
+</div>
+
+<!-- 七 -->
+<div class="section-header">
+  <h3>七、跨文明的對話</h3>
+</div>
+
+<p>所有古代文明都面對同一個根本問題：如何知道季節何時改變？如何知道何時播種、何時收成？</p>
+
+<p>馬雅人用太陽、月亮和金星的觀測來回答這個問題。中國文明用二十四節氣與干支曆法來回答。埃及人用天狼星的偕日升起與尼羅河氾濫來回答。歐洲人用巨石文化（如 Stonehenge）的至日對位來回答。</p>
+
+<table>
+  <tr><th></th><th>馬雅</th><th>中國</th><th>埃及</th><th>歐洲史前</th></tr>
+  <tr><td>核心天體</td><td>太陽、金星、月亮</td><td>太陽（節氣）、太陰</td><td>太陽、天狼星</td><td>太陽</td></tr>
+  <tr><td>曆法核心</td><td>Tzolk'in+Haab'+Long Count</td><td>陰陽合曆+60干支</td><td>365天太陽曆</td><td>太陽年+月相</td></tr>
+  <tr><td>建築對位</td><td>Caracol、Group E、金字塔</td><td>天壇、觀星臺</td><td>神廟對齊太陽</td><td>Stonehenge</td></tr>
+  <tr><td>農時依據</td><td>乾/雨季、太陽天頂</td><td>二十四節氣</td><td>尼羅河氾濫</td><td>至日</td></tr>
+  <tr><td>政治應用</td><td>曆法＝王權合法性</td><td>觀象授時＝天命</td><td>法老＝太陽神化身</td><td>祭司掌握曆法</td></tr>
+  <tr><td>軍事應用</td><td>金星週期定開戰</td><td>金星（太白）用於占星</td><td>較不明顯</td><td>較不明顯</td></tr>
+</table>
+
+<p>這些文明各自獨立發展出結構上相似的宇宙觀——三層宇宙、四方位、世界樹、君王作為天地中介——不是因為互相傳播，而是因為人類面對相同的自然限制，產生了類似的認知框架。不同文明用不同的語言、不同的神話、不同的曆法回答同一個問題——但問題本身是共通的。</p>
+
+<p>中國的「穀雨」告訴農民雨水將至，馬雅的第一次太陽天頂（5月26日）告訴農民雨季開始。中國的「冬至」是陰極陽生，馬雅的冬至是太陽重返之路的轉折點。方式不同，但底層的邏輯相通：人類需要把天空的規律轉化為生活的秩序。</p>
+
+<!-- 八 -->
+<div class="section-header">
+  <h3>八、從天空到土地——一個完整的循環</h3>
+</div>
+
+<p>前面談了創世、太陽月亮、玉米馴化、天文建築、農業與曆法。它們不是各自獨立的主題，而是一個完整敘事的不同章節：</p>
+<p>天空的規律（太陽運行）→ 土地的節奏（農業時間）→ 人的身體（玉米造人）→ 人的時間（曆法）→ 人的秩序（儀式與政治）。</p>
+<p>馬雅文明的獨特之處，在於它把這五個環節視為一個不可分割的整體。天空不只是天空——它是玉米生長的條件。玉米不只是一種作物——它是人類身體的來源。身體不只是一具肉體——它是宇宙循環的一部分。時間不只是一種計量——它是被神靈背負著穿越永恆的責任。</p>
+<p>這種一體性——馬雅人與世界合一的理解——不是哲學冥想。它是每天早上走進田裡，把手放進泥土，種下一粒玉米籽的具體行為。合一不是一個概念，它是人類與土地、雨水、太陽共同完成的持續創造。</p>
+
+<!-- 九 -->
+<div class="section-header">
+  <h3>九、場景設計——如何讓觀眾看見</h3>
+</div>
+
+<div class="design-note">
+<strong>場景一｜創世之室</strong><br>
+暗房，地面投影流水紋。牆面浮現 Popol Vuh 創世文字，聲音從低頻逐步展開。角落一座 Ceiba 樹投影，從根部（冥界）到樹冠（天界）緩緩亮起。<br><br>
+
+<strong>場景二｜地平線觀測牆</strong><br>
+一條 8 公尺弧形投影牆，模擬從 Uaxactún Group E 看出去的地平線。觀眾站在觀測點，看到一年中太陽從不同位置升起。標示春分、夏至、秋分、冬至。<br><br>
+
+<strong>場景三｜玉米的旅程</strong><br>
+兩面並列的展示櫃：一面展示大芻草（teosinte）標本與現代玉米穗的實物對比。另一面展示 tb1 與 tga1 基因的簡單圖解。文字：「從 2 粒到 400 粒——9,000 年的選擇。」<br><br>
+
+<strong>場景四｜蛇影劇場</strong><br>
+縮尺模型展示庫庫爾坎金字塔春分蛇影。觀眾可以調整日期模擬器，觀察蛇影在不同日期的變化。<br><br>
+
+<strong>場景五｜棉花的故事</strong><br>
+展示棉花的原始形態、紡紗工具（背帶織機）、天然染料樣本（胭脂蟲紅、靛藍、胭脂樹果）。旁邊一面鏡子與文字：「你身上穿的棉質衣服，根源在這裡。」<br><br>
+
+<strong>場景六｜曆法輪</strong><br>
+地面投影一個 52 年的曆法輪，觀眾站在中央，四周顯示 Tzolk'in 與 Haab' 如何以齒輪方式嚙合。啟動互動時，曆法輪開始轉動，五十二年後回到原點。
+</div>
+
+<!-- 十 -->
+<div class="section-header">
+  <h3>十、核心觀點</h3>
+</div>
+
+<div class="key-point">
+<p><strong>不是「馬雅人觀察太陽」——而是馬雅人透過太陽觀測，把自然變化轉化成農業、儀式、建築與政權的秩序。</strong></p>
+<p><strong>不是「馬雅人吃玉米」——而是馬雅人相信生命本身來自玉米。玉米是人類身體的來源。吃玉米是回到生命源頭的行為。</strong></p>
+<p><strong>不是「馬雅人有曆法」——而是時間在馬雅世界中被視為有力量的、神聖的、被神靈背負的。正確的時間秩序維繫著宇宙的存在。</strong></p>
+<p><strong>不是「古代智慧」——而是七百萬馬雅人今天仍然生活在這片土地上。他們的語言、農業、紡織與曆法知識，是活的傳統。</strong></p>
+</div>
+
+<p>如果只能用一句話來總結這個馬雅宇宙觀，那就是：</p>
+<div class="highlight-box">
+  <p><strong>在馬雅文明中，天空、土地、身體與時間不是四個不同的東西——它們是一體的四面。</strong></p>
+</div>
+
+<!-- 十一 -->
+<div class="section-header">
+  <h3>十一、展覽的目標</h3>
+</div>
+
+<div class="vision-card">
+  <h5>🎯 核心訴求</h5>
+  <p>讓觀眾理解馬雅人如何從創世神話出發，透過長期天文觀測建立時間、農業與宇宙秩序，並將玉米與棉花等作物轉化為文明生存的基礎。</p>
+</div>
+<div class="vision-card">
+  <h5>💛 觀眾感受</h5>
+  <p>黎明、初光、規律、週期、土地、生命、感恩、生長、收成——以及「原來人類與宇宙的關係可以這樣理解」的開闊感。</p>
+</div>
+<div class="vision-card">
+  <h5>📖 觀眾帶走</h5>
+  <p>玉米由野生大芻草經過九千年馴化而來。太陽觀察是曆法的起點。建築可以捕捉天空。棉花——身上穿的衣服——根源在美洲。農業與靈性在馬雅文明中不可分割。</p>
+</div>
+<div class="vision-card">
+  <h5>🏛️ 空間氣氛</h5>
+  <p>從神話的黑暗逐步走向天文的光明，再從天文回到土地的溫暖。觀眾不是站在展品前面觀看——他們應該感覺自己站在宇宙之中。</p>
+</div>
+
+<!-- 總結 -->
+<div class="section-header">
+  <h3>一粒玉米中的宇宙</h3>
+</div>
+
+<p>馬雅文明的偉大，不在於金字塔的高度，也不在於曆法的精確度。而在於它對一個問題的回答：人類與宇宙是什麼關係？</p>
+
+<p>馬雅人的回答是：人類不站在宇宙之外。人類是宇宙秩序的一部分。</p>
+
+<p>人體由玉米構成。玉米由太陽與雨水養育。太陽與月亮由英雄雙子化身而成。英雄雙子的故事書寫在星辰的運行之中。</p>
+
+<p>一粒玉米 = 一個縮小的宇宙。</p>
+
+<p>當一個馬雅農民站在 milpa 田中，看著太陽在天頂的位置判斷播種的時機——他與宇宙之間沒有距離。他在做的，與一千年前英雄雙子在西巴巴所做的事情，是同一件事：讓生命經過死亡後重生。</p>
+
+<p>當一個馬雅祭司在卡拉科爾天文台的窗口追蹤金星——他不是在研究宇宙。他正在參與宇宙的秩序，確保宇宙不會因為人類的疏忽而失去平衡。</p>
+
+<p>在這個意義上，馬雅文明不是一個遠古的、與我們無關的文明。它是一個持續千年的回答——關於人如何活在宇宙之中，而不是宇宙之外。</p>
+
+<p>這個回答記錄在金字塔的階梯上、在德勒斯登手抄本的數字裡、在現代馬雅農民仍然觀察太陽的雙眼之中。</p>
+
+</div>
+</body>
+</html>

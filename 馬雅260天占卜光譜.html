@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+  :root{
+    --bg:#0c0e12; --card:#161a21; --card2:#1c212b; --gold:#e6b94d; --jade:#4fd39b;
+    --terra:#e0824a; --rose:#e06a6a; --text:#e6e3d8; --muted:#9aa0a6; --border:#2a3038;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7;}
+  .wrap{max-width:1050px;margin:0 auto;padding:26px 20px 80px;}
+  .hero{border:1px solid var(--border);border-radius:14px;padding:24px 24px 20px;
+        background:linear-gradient(160deg,#1a1f28,#12151b);margin-bottom:22px;}
+  .hero .tag{font-size:12px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;}
+  .hero h1{margin:.3em 0 .15em;font-size:28px;color:var(--gold);}
+  .hero .sub{color:var(--muted);font-size:14px;}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:16px;font-size:13px;}
+  .legend span{display:flex;align-items:center;gap:6px;}
+  .dot{width:12px;height:12px;border-radius:50%;display:inline-block;}
+  h2{color:var(--gold);font-size:20px;margin:32px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--border);}
+  h3{color:var(--jade);font-size:15px;margin:18px 0 8px;}
+
+  /* Spectrum bars */
+  .spectrum{margin:14px 0;}
+  .band{display:flex;border-radius:12px;overflow:hidden;border:1px solid var(--border);}
+  .seg{flex:1;min-width:0;padding:10px 8px;text-align:center;font-size:12px;font-weight:600;color:#10121a;}
+  .s-pos{background:linear-gradient(135deg,#4fd39b,#3aa87f);}
+  .s-mid{background:linear-gradient(135deg,#e6b94d,#caa23a);}
+  .s-cha{background:linear-gradient(135deg,#e0824a,#c9673a);}
+  .cap{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px;padding:0 4px;}
+
+  /* Day cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin:14px 0 8px;}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px 14px;}
+  .card .name{font-size:17px;font-weight:700;color:var(--text);}
+  .card .kiche{font-size:12px;color:var(--muted);margin-bottom:8px;}
+  .card .cat{display:inline-block;font-size:10.5px;padding:2px 8px;border-radius:4px;margin-bottom:8px;font-weight:600;}
+  .cat.pos{background:rgba(79,211,155,.18);color:var(--jade);}
+  .cat.mid{background:rgba(230,185,77,.18);color:var(--gold);}
+  .cat.cha{background:rgba(224,130,74,.2);color:var(--terra);}
+  .card .pl{font-size:12.5px;color:#d8d5c8;}
+  .card .pl b{color:var(--jade);}
+  .card .nl{font-size:12.5px;margin-top:6px;}
+  .card .nl b{color:var(--terra);}
+  .card .nl.em{color:#d9a08a;}
+  .quote{background:var(--card);border-left:3px solid var(--jade);padding:12px 16px;border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;color:#d8d5c8;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:18px;padding-top:14px;border-top:1px dashed var(--border);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="tag">Maya Sacred Calendar</div>
+    <h1>馬雅 260 天占卜光譜</h1>
+    <div class="sub">20 日名（nawal） × 13 數字 = 260 組合 —— 不是全正向，而是一道「正面—中性—帶負面課題」的光譜</div>
+    <div class="legend">
+      <span><span class="dot" style="background:#4fd39b"></span> 正面（特質正向）</span>
+      <span><span class="dot" style="background:#e6b94d"></span> 中性</span>
+      <span><span class="dot" style="background:#e0824a"></span> 帶負面課題</span>
+    </div>
+  </div>
+
+  <h2>一、先講結論：260 天不是全正能量</h2>
+  <div class="sec">
+    <div class="quote">
+      馬雅占卜的設計目的，在 NMAI 那份 K'iche' 守日者文件中明示：<b>「Chol Q'ij 讓你能辨識一個人的＜優點與缺點＞，以建立平衡。」</b>——「優點與缺點」<u>同時存在</u>，所以它不可能只是「每日宣導正向」。負面特質是<b>系統性</b>存在，不是偶爾出現。
+    </div>
+    <p>策展時關鍵的分寸：<b>「負面」＝ 課題／需要平衡的地方，不是「宣判」。</b>馬雅占卜的目的正是「指出弱點，好求平衡、避錯」。</p>
+  </div>
+
+  <h2>二、整體光譜（20 日名分布）</h2>
+  <div class="spectrum">
+    <div class="band">
+      <div class="seg s-pos">正面 ×6</div>
+      <div class="seg s-mid">中性 ×4</div>
+      <div class="seg s-cha">帶負面課題 ×10</div>
+    </div>
+    <div class="cap"><span>正向特質</span><span>能量中性</span><span>含課題（易怒/承受苦/嫉妒）</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:8px;">20 個日名中，<b>10 個明確帶負面課題</b>。再乘上 13 個數字（1–13，標示能量強度與吉凶調性），260 種組合裡負面的比例更高——這正是它「有深度」而非「速食星座」的原因。</p>
+
+  <h2>三、20 日名逐一看（正面 ＋ 負面課題）</h2>
+  <div class="grid">
+
+    <div class="card"><div class="name">Imix</div><div class="kiche">Imox（海/河/湖）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 好的工作者、直覺、有創意</div><div class="nl"><b>課題</b> 與原始混沌、穩定的求索相關，須安頓心神</div></div>
+
+    <div class="card"><div class="name">Ik'</div><div class="kiche">Iq'（風/氣/精神）</div><span class="cat mid">中性</span><div class="pl"><b>＋</b> 感性、善交際、體貼、人生平順</div><div class="nl"><b>課題</b> 風暴、颶風意象，較波動</div></div>
+
+    <div class="card"><div class="name">Ak'b'al</div><div class="kiche">Aq'ab'al（黑暗/黎明）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 勇敢獵人、謙遜、認真、精準、能承受批評</div></div>
+
+    <div class="card"><div class="name">K'an</div><div class="kiche">K'at（網/糾纏）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 推行理論與實踐之法</div><div class="nl"><b>課題</b> 較弱、易趨火，糾纏不清</div></div>
+
+    <div class="card"><div class="name">Chikchan</div><div class="kiche">Kan（羽蛇）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 公正、真理、和平、強健、靈巧、睿智、真誠</div></div>
+
+    <div class="card"><div class="name">Kimi</div><div class="kiche">Kame（死亡）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 堅強、太陽的納瓦勒</div><div class="nl"><b>課題</b> 承受很多苦，與死亡、厄運意象相伴</div></div>
+
+    <div class="card"><div class="name">Manik'</div><div class="kiche">Kej（鹿）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 撐起天地、承載人類命運、他人守護者、少生病、強健</div><div class="nl"><b>課題</b> 易怒</div></div>
+
+    <div class="card"><div class="name">Lamat</div><div class="kiche">Q'anil（種子/黃）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 種子、四季、人畜植</div><div class="nl"><b>課題</b> 承受很多、不堅韌、總需他人精神支持</div></div>
+
+    <div class="card"><div class="name">Muluc</div><div class="kiche">Toj（供品/償還）</div><span class="cat mid">中性</span><div class="pl"><b>＋</b> 調解者、自學、心理與道德佳</div><div class="nl"><b>課題</b> 火的納瓦勒，黑暗面需照見</div></div>
+
+    <div class="card"><div class="name">Ok</div><div class="kiche">Tz'i'（狗）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 五官、聰明、正義</div><div class="nl"><b>課題</b> 嫉妒</div></div>
+
+    <div class="card"><div class="name">Chuwen</div><div class="kiche">B'atz'（線）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 命運之線、連結過去、經商婚姻有成、受人敬重、聰明、守護者與教師</div></div>
+
+    <div class="card"><div class="name">Eb</div><div class="kiche">E（道路）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 求親之日、祖先傾聽、善交際、好旅人、慷慨</div></div>
+
+    <div class="card"><div class="name">Ben</div><div class="kiche">Aj（玉米/勝利）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 玉米、征服、非常幸運、平靜、聰明</div><div class="nl"><b>課題</b> 有時情緒起伏</div></div>
+
+    <div class="card"><div class="name">Ix</div><div class="kiche">I'x（虎）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 生命活力、智慧、大地神明、強健</div></div>
+
+    <div class="card"><div class="name">Men</div><div class="kiche">Tz'ikin（鳥）</div><span class="cat pos">正面</span><div class="pl"><b>＋</b> 造物主、錢財/商業/商人日、善良、仁慈、浪漫</div></div>
+
+    <div class="card"><div class="name">K'ib'</div><div class="kiche">Ajmaq（意志）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 意志、防過錯、感恩、勇敢</div><div class="nl"><b>課題</b> 情緒化</div></div>
+
+    <div class="card"><div class="name">Kab'an</div><div class="kiche">No'j（智慧）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 智慧、理性、思想、培育知識、審慎、良善</div><div class="nl"><b>課題</b> 易怒</div></div>
+
+    <div class="card"><div class="name">Etz'nab'</div><div class="kiche">Tijax（命運/黑曜石刀）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 醫者、勇敢、良善</div><div class="nl"><b>課題</b> 易怒，易受累於流言、爭執、意外</div></div>
+
+    <div class="card"><div class="name">Kawak</div><div class="kiche">Kawoq（雷）</div><span class="cat mid">中性</span><div class="pl"><b>＋</b> 求成功、醫精神疾患、祈繁榮、善預言、審判者</div></div>
+
+    <div class="card"><div class="name">Ajaw</div><div class="kiche">Ajpu'（太陽）</div><span class="cat cha">帶課題</span><div class="pl"><b>＋</b> 生命、太陽之主、有才華、親切</div><div class="nl"><b>課題</b> 脾氣急躁、愛批評</div></div>
+
+  </div>
+
+  <h2>四、策展呈現的關鍵原則</h2>
+  <div class="sec">
+    <div class="quote">
+      別讓參觀者輸入生日後，跳出「你這天是『承受很多苦』」這種<b>未加說明</b>的斷句——會讓人不安、甚至覺得被冒犯。正確做法：
+      <ul style="margin-top:8px;">
+        <li>展示「<b>每個日名都有優點與缺點</b>，是 260 種不同組合」的<b>整體光譜</b>。</li>
+        <li>講清楚「<b>負面的＝課題／需要平衡的地方，不是宣判</b>」。</li>
+        <li>互動若輸入生日，用<b>建設性語言</b>包裝——「這一面的<u>挑戰</u>是……，<u>平衡之道</u>是……」。</li>
+      </ul>
+    </div>
+    <h3>為什麼負面是「加分」而非「風險」</h3>
+    <p>因為它使這個主題有<b>層次</b>與<b>涵義</b>：它不是「每日好運勢」（太薄、像星座速食），而是「<b>每天反映你某個面向，好的壞的都看</b>」——正呼應馬雅占卜「認識自己、求平衡」的深層意義。這比純粹的「算命」深刻得多。</p>
+  </div>
+
+  <div class="note">
+    資料來源：Smithsonian NMAI「Living Maya Time」網站之《The Meaning of the Days in the Maya Sacred Calendar》，由瓜地馬拉 K'iche' 守日者群（Komon Tohil, Zunil）撰寫。此為<b>活的基切守日者傳統</b>之觀點，非考古重建；不同守日者／語言群體、不同時期解讀可能不同。負面課題之分類由小柚子依原文特質標示，非 PDF 原文另行定義之等級。
+  </div>
+
+</div>
+</body>
+</html>

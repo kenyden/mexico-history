@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>馬雅曆法完整對照圖與講解稿</title>
+<style>
+  :root{
+    --bg:#0c0e12; --card:#161a21; --card2:#1c212b; --gold:#e6b94d; --jade:#4fd39b;
+    --terra:#e0824a; --rose:#e06a6a; --text:#e6e3d8; --muted:#9aa0a6; --border:#2a3038; --head:#2f353f;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;}
+  .wrap{max-width:1040px;margin:0 auto;padding:26px 22px 80px;}
+  .hero{border:1px solid var(--border);border-radius:14px;padding:24px 26px 20px;
+        background:linear-gradient(160deg,#1a1f28,#12151b);margin-bottom:24px;}
+  .hero .tag{font-size:12px;letter-spacing:.18em;color:var(--gold);text-transform:uppercase;}
+  .hero h1{margin:.3em 0 .15em;font-size:30px;color:var(--gold);}
+  .hero .sub{color:var(--muted);font-size:14.5px;}
+  .hero .narr{font-size:14px;color:#d8d5c8;margin-top:14px;line-height:1.8;}
+  h2{color:var(--gold);font-size:21px;margin:36px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  h3{color:var(--jade);font-size:16px;margin:20px 0 8px;}
+  .sec{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;}
+  .sec + .sec{margin-top:16px;}
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin:14px 0;}
+  th,td{border:1px solid var(--border);padding:9px 11px;text-align:left;vertical-align:top;}
+  th{background:var(--head);color:var(--gold);font-weight:600;}
+  tr:nth-child(even) td{background:#181d25;}
+  td b{color:var(--gold);}
+  .quote{background:var(--card2);border-left:3px solid var(--jade);padding:12px 16px;
+         border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;color:#d8d5c8;}
+  .warn{background:rgba(224,130,74,.10);border-left:3px solid var(--terra);padding:12px 16px;
+        border-radius:0 8px 8px 0;margin:12px 0;font-size:14px;}
+  .warn b{color:var(--terra);}
+  .gold{color:var(--gold);}
+  .jade{color:var(--jade);}
+  ul{padding-left:20px;} li{margin:6px 0;}
+  .script{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:12px 0;}
+  .script .step{color:var(--gold);font-weight:700;margin-bottom:4px;}
+  .script .talk{color:#d8d5c8;font-size:14.5px;font-style:italic;}
+  .note{font-size:12.5px;color:var(--muted);margin-top:22px;padding-top:14px;border-top:1px dashed var(--border);}
+  .pill{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;margin-right:4px;}
+  .pill.confirmed{background:rgba(79,211,155,.16);color:var(--jade);}
+  .pill.theory{background:rgba(230,185,77,.16);color:var(--gold);}
+  .numeric{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;color:var(--jade);}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <div class="tag">Maya Calendar · 策展展區素材</div>
+    <h1>馬雅曆法完整對照圖與講解稿</h1>
+    <div class="sub">260 天 · 365 天 · 18 月＋5 天 · 52 年 · 金星 584 · 37,960 · 5,125 年 —— 一次講清</div>
+    <div class="narr">
+      馬雅人不是用一套曆法，而是用<b>三套各司其職、互相咬合的「齒輪」</b>：一顆管「命運、一顆管「日子與季節」、一顆管「歷史的長河」。它們同時轉，就像三支時鐘報不同的時間——這就是馬雅人對「時間」的三重理解。這頁是你的<b>完整歷法展區素材</b>：對照表、齒輪樹視覺圖、分步講解稿、易錯提醒，一次到位。
+    </div>
+  </div>
+
+  <h2>一、總覽：馬雅三套曆法</h2>
+  <div class="sec">
+    <table>
+      <tr><th style="width:19%">曆法</th><th style="width:27%">天數</th><th>管什麼</th><th style="width:22%">比喻</th></tr>
+      <tr><td><b>Tzolk'in</b>（神聖曆）</td><td><span class="numeric">260</span> 天<br><span class="jade">20 日名 × 13 數字</span></td><td>命運、能量、占卜、命名、擇日</td><td>「命盤」</td></tr>
+      <tr><td><b>Haab</b>（太陽曆）</td><td><span class="numeric">180+5</span> 天<br><span class="jade">18 月×20 天 + 5 天</span></td><td>季節、農耕、節慶、生活安排</td><td>「日曆」</td></tr>
+      <tr><td><b>Long Count</b>（長紀曆）</td><td><span class="numeric">≈5,125</span> 年<br><span class="jade">13 baktun = 1,872,000 天</span></td><td>歷史長河、記錄王權與戰爭</td><td>「絕對時間軸」</td></tr>
+    </table>
+    <div class="quote">一句話版：<b>260 天看命運、365 天過日子、5125 年的長紀曆記長河。</b></div>
+  </div>
+
+  <h2>二、完整對照表：從最小到最大</h2>
+  <div class="sec">
+    <table>
+      <tr><th>層級</th><th style="width:28%">週期</th><th>算法</th><th>對表關係</th></tr>
+      <tr><td>1（最小）</td><td><b>260 天神聖曆</b></td><td><span class="numeric">20 日名 × 13 數字</span></td><td>自身循環，用於占卜</td></tr>
+      <tr><td>2</td><td><b>365 天太陽曆</b></td><td><span class="numeric">18 月 × 20 天 + 5 天 Wayeb</span></td><td>季節、農耕</td></tr>
+      <tr><td>3</td><td><b>584 天金星週期</b></td><td><span class="numeric">236+90+250+8</span></td><td>晨星 / 上合 / 昏星 / 下合</td></tr>
+      <tr><td>4</td><td><b>2,920 天</b></td><td><span class="numeric">5 金星 × 584 = 8 太陽年 × 365</span></td><td>金星 ⟷ 太陽對表</td></tr>
+      <tr><td>5</td><td><b>52 年（曆法輪）</b></td><td><span class="numeric">260 與 365 的 LCM = 18,980 天</span></td><td>神聖曆 ⟷ 太陽曆對表（<span class="terra">非金星</span>）</td></tr>
+      <tr><td>6</td><td><b>37,960 天</b></td><td><span class="numeric">65 金星 × 584 = 37,960</span><br>= <span class="numeric">146 × 260 = 104 × 365</span></td><td>金星 ⟷ 神聖曆 ⟷ 太陽曆三對表</td></tr>
+      <tr><td>7（最大）</td><td><b>≈5,125 年長紀曆</b></td><td><span class="numeric">13 baktun = 1,872,000 天</span></td><td>歷史長河（2012「末日」= 此周期輪完）</td></tr>
+    </table>
+    <div class="quote">
+      <b>核心對表公式</b>（馬雅數學的妙處）：<br>
+      <span class="numeric">65 × 584 = 37,960 天 = 146 × 260（神聖曆） = 104 × 365（太陽年）</span><br>
+      三套曆法在跑滿 37,960 天（約 104 年）時<b>完全對齊</b>——德累斯頓抄本金星表橫跨的正是這 65 個金星週期。
+    </div>
+  </div>
+
+  <h2>三、齒輪樹：視覺化理解</h2>
+  <div class="sec">
+    <svg viewBox="0 0 1000 560" width="100%" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="bg" cx="50%" cy="40%" r="75%">
+          <stop offset="0%" stop-color="#1a1f28"/><stop offset="100%" stop-color="#0c0e12"/>
+        </radialGradient>
+      </defs>
+      <rect width="1000" height="560" fill="url(#bg)"/>
+      <!-- three gears at bottom: 260 (jade), 365 (gold), 5125 (terra) -->
+      <g font-family="PingFang SC,Microsoft YaHei,sans-serif" text-anchor="middle">
+        <!-- 260 gear -->
+        <circle cx="250" cy="360" r="110" fill="none" stroke="#4fd39b" stroke-width="3"/>
+        <circle cx="250" cy="360" r="30" fill="none" stroke="#4fd39b" stroke-width="2"/>
+        <text x="250" y="352" fill="#4fd39b" font-size="38" font-weight="bold">260</text>
+        <text x="250" y="385" fill="#cdebe0" font-size="13">神聖曆</text>
+        <text x="250" y="410" fill="#9aa0a6" font-size="12">命運</text>
+        <!-- 365 gear -->
+        <circle cx="500" cy="360" r="110" fill="none" stroke="#e6b94d" stroke-width="3"/>
+        <circle cx="500" cy="360" r="30" fill="none" stroke="#e6b94d" stroke-width="2"/>
+        <text x="500" y="352" fill="#e6b94d" font-size="38" font-weight="bold">365</text>
+        <text x="500" y="385" fill="#e0d5a8" font-size="13">太陽曆</text>
+        <text x="500" y="410" fill="#9aa0a6" font-size="12">季節</text>
+        <!-- 5125 gear -->
+        <circle cx="750" cy="360" r="110" fill="none" stroke="#e0824a" stroke-width="3"/>
+        <circle cx="750" cy="360" r="30" fill="none" stroke="#e0824a" stroke-width="2"/>
+        <text x="750" y="352" fill="#e0824a" font-size="38" font-weight="bold">5125</text>
+        <text x="750" y="385" fill="#e8c2a8" font-size="13">長紀曆</text>
+        <text x="750" y="410" fill="#9aa0a6" font-size="12">歷史</text>
+      </g>
+      <!-- commenstrate points on top -->
+      <g font-family="PingFang SC,Microsoft YaHei,sans-serif" text-anchor="middle">
+        <rect x="90" y="80" width="820" height="220" rx="12" fill="#161a21" stroke="#2a3038"/>
+        <text x="500" y="112" fill="#e6b94d" font-size="16" font-weight="bold">對表節點（齒輪咬合處）</text>
+        <!-- 52 year line -->
+        <text x="290" y="150" fill="#4fd39b" font-size="14" font-weight="bold">52 年對表</text>
+        <text x="290" y="175" fill="#9aa0a6" font-size="12.5">260 × 365</text>
+        <text x="290" y="197" fill="#9aa0a6" font-size="12.5">= 18,980 天</text>
+        <!-- 37960 line -->
+        <text x="500" y="150" fill="#e0824a" font-size="14" font-weight="bold">37,960 對表</text>
+        <text x="500" y="175" fill="#9aa0a6" font-size="12">65 金星 = 146×260 = 104×365</text>
+        <!-- 2920 line -->
+        <text x="710" y="150" fill="#e6b94d" font-size="14" font-weight="bold">2,920 對表</text>
+        <text x="710" y="175" fill="#9aa0a6" font-size="12">5 金星 = 8 太陽年</text>
+        <text x="710" y="197" fill="#9aa0a6" font-size="12.5">金星 ⟷ 太陽</text>
+        <!-- connector notes -->
+        <text x="500" y="235" fill="#9aa0a6" font-size="12.5">金星（584/2920/37960）與 52 年曆法輪是<b>兩條獨立對表軸</b>，不要混。</text>
+      </g>
+    </svg>
+  </div>
+
+  <h2>四、分步講解稿（帶團 / 策展可照念）</h2>
+
+  <div class="script"><div class="step">第 1 步：260 天看命運</div>
+    <div class="talk">「馬雅人相信每天都有它獨特的能量。他們把 20 個『日名』配上 1 到 13 的數字，配出 260 天——每 260 天回到同一個日子。這套用來判斷一個人的命運、決定什麼時候做重要的事，就像我們的命盤、良辰吉時。」</div>
+  </div>
+
+  <div class="script"><div class="step">第 2 步：365 天過日子</div>
+    <div class="talk">「那 260 天不能拿來種田，所以馬雅人另有 365 天的太陽曆——18 個月、每月 20 天，加上 5 天歲末凶日（Wayeb），正好 365 天。這個管季節、管播種收穫、管節慶，就像我們的公曆。」</div>
+  </div>
+
+  <div class="script"><div class="step">第 3 步：584 天金星（馬雅最重視的一顆星）</div>
+    <div class="talk">「金星是馬雅最用心觀測的一顆星。它每隔 584 天回到同樣的位置——晨星 236 天、消失在太陽後 90 天、昏星 250 天、再消失 8 天。馬雅人把金星跟戰爭、跟羽蛇神、跟王權連在一起。」</div>
+  </div>
+
+  <div class="script"><div class="step">第 4 步：52 年曆法輪</div>
+    <div class="talk">「260 天和 365 天會同時回到原點，需要 18,980 天，換算成太陽年就是 52 年。馬雅人把這叫做曆法輪——一神一俗兩顆齒輪重新對齊。」</div>
+  </div>
+
+  <div class="script"><div class="step">第 5 步：37,960 天——三齒輪對齊</div>
+    <div class="talk">「馬雅數學最漂亮的地方：65 個金星週期，正好等於 146 個 260 天神聖曆，也等於 104 個太陽年——都是 37,960 天。金星、神聖曆、太陽曆三套曆法，在大週期裡完全對齊。」</div>
+  </div>
+
+  <div class="script"><div class="step">第 6 步：5125 年長紀曆（收尾）</div>
+    <div class="talk">「260 和 365 會一直重複，馬雅人需要一個不重複的計時器來記歷史。長紀曆從世界創世那天開始，連續數日子，一數一大輪 5125 年，刻在石碑上記錄王權與戰爭。2012 年大家都在吵的『末日』，其實只是這個 5125 年大週期輪完了——不是世界末日，是新一輪的開始。」</div>
+  </div>
+
+  <h2>五、易錯提醒（策展必讀）</h2>
+  <div class="sec">
+    <div class="warn"><b>⚠ 數字從「0」起算：</b>馬雅 Haab 的日期在月內編 0 到 19，0 是「坐月日」。所以「2 K'ank'in」是 K'ank'in 的第 3 天（不是第 2 天）。</div>
+    <div class="warn"><b>⚠ 是 5125 年、不是 5118：</b>長紀曆完整週期 = 13 baktun = 5,125 年。有人講成 5118，是混淆了，別寫錯（會被查證挑錯）。</div>
+    <div class="warn"><b>⚠ 52 年 ≠ 半個金星週期：</b>52 年是 260 天 × 365 天的對表（18,980 天），跟金星（584）完全無關。半個金星是 292 天。</div>
+    <div class="warn"><b>⚠ 金星 ≠ 260 + 相位 + 260：</b>單個 584 天裡沒有「260」這隻輪子。正確分解是 236+90+250+8。金星跟 260 天的關係在「大週期 37,960 天」那層（65 金星 = 146 神聖曆）。</div>
+    <div class="warn"><b>⚠ 260 天是全中美洲共享傳統：</b>馬雅、阿茲特克、薩波特克用的是同一套曆法的各地變體，起源比馬雅更早（最早證據墨西哥 Oxtotitlán 洞穴，約前 800–500 年；學者多指向奧爾梅克）。</div>
+    <div class="warn"><b>⚠ 「13」的來源無定論：</b>馬雅沒留下為什麼用 13 的記載。主流假說：身體說（13 大關節 × 20 指趾 = 260）、孕期說（260 ≈ 人類孕期 266 天）。講成「學界在討論」，不要當定論。</div>
+  </div>
+
+  <h2>六、一句話總結</h2>
+  <div class="sec">
+    <div class="quote">
+      馬雅人不是用一套曆法，而是用<b>三個齒輪</b>：260 天看命運、365 天過日子、5125 年的長紀曆記長河。它們同時轉，像三支時鐘報不同的時間——金星（584→2920→37960）與 52 年曆法輪是兩條獨立的對表軸。這就是馬雅人對時間的三重理解。
+    </div>
+  </div>
+
+  <div class="note">
+    <b>來源與誠實標註：</b>本文之主體（260/365/18 月+5/52 年歷法輪/金星 584 相位/2920 天/37960 天/5125 年長紀曆）皆為中美洲曆法之高可信度普遍學術共識。下列部分為「推測或待確認」，請勿於展示中當成定論：① 「13」之來源（身體說/孕期說）為假說；② 260 天曆之「最初起源」指向奧爾梅克（Oxtotitlán 洞穴證據）但學界仍在討論；③ 金星相位之精確天數，不同抄本/詮釋略有出入（此處採德累斯頓抄本標準值）。金星與神聖曆之「260 對表」需在 37,960 天層級才成立，單個 584 天不整除 260。
+    <br><br>
+    整理：小柚子（Hermes）· 馬雅曆法展區素材 · 繁體中文
+  </div>
+
+</div>
+</body>
+</html>
