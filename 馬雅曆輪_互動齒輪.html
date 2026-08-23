@@ -59,13 +59,16 @@
   @media(max-width:680px){ .wrap{padding:26px 14px 60px;} .hero h1{font-size:24px;} .wheel-box{width:230px;height:230px;} }
   /* 中央同心曆輪 */
   .central-wrap{display:flex;justify-content:center;align-items:center;position:relative;margin:26px auto;padding:34px 0;background:var(--panel);border:1px solid var(--border);border-radius:16px;max-width:660px;}
-  .central-box{position:relative;width:560px;height:560px;}
+  .central-box{position:relative;width:620px;height:470px;}
   .central-box svg{width:100%;height:100%;display:block;}
   .central-wrap .ptr{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:2px;height:36px;background:#e6b94d;border-radius:2px;z-index:6;box-shadow:0 0 8px rgba(230,185,77,.6);}
   .center-read{margin:6px auto 0;text-align:center;font-family:-apple-system,"PingFang TC",sans-serif;}
   .center-read .d1{font-size:32px;color:#e6b94d;font-weight:800;letter-spacing:.03em;line-height:1.2;}
   .center-read .d2{font-size:14px;color:#9aa0a6;margin-top:5px;}
   .center-read .d3{font-size:12px;color:#5c6167;margin-top:5px;}
+  .gmt-clock{margin-top:14px;font-size:15px;color:#9aa0a6;letter-spacing:.04em;font-variant-numeric:tabular-nums;}
+  .gmt-clock b{color:var(--gold);}
+  .gmt-row{text-align:center;margin-top:8px;font-size:12.5px;color:#5c6167;font-variant-numeric:tabular-nums;}
   .legend{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:12px;}
   .legend .lg{font-size:12.5px;color:#9aa0a6;display:flex;align-items:center;gap:6px;}
   .legend .sw{width:12px;height:12px;border-radius:3px;display:inline-block;}
@@ -81,6 +84,7 @@
     <div class="tags">
       <span class="tag">260 神聖曆</span><span class="tag">365 太陽曆</span><span class="tag">584 金星週期</span><span class="tag">52 年曆法輪</span><span class="tag">37,960 三曆對表</span>
     </div>
+    <div class="gmt-clock">GMT 現在：<b id="gmtClock">--:--:--</b></div>
   </div>
 
   <!-- WHEELS -->
@@ -88,6 +92,7 @@
     <div class="central-box" id="central"></div>
   </div>
   <div class="center-read" id="centerRead"></div>
+  <div class="gmt-row" id="gmtRow"></div>
   <div class="legend" id="legend"></div>
 
   <!-- CONTROLS -->
@@ -163,12 +168,12 @@ function ringText(items,cx,cy,r,fontSize,fill,stepStart){
 const central=document.getElementById("central");
 const legend=document.getElementById("legend");
 const G=[
-  {key:"haab",period:365,label:"Haab&#39; 365",outer:HAAB,x:200,y:320,r:175,teeth:28,tr:155},
-  {key:"tz",period:260,label:"Tzolk&#39;in 260",outer:DAYS,x:495,y:320,r:120,teeth:24,tr:96},
-  {key:"ven",period:584,label:"Venus 584",outer:VENUS.map(v=>v.n),x:392,y:137,r:90,teeth:16,tr:48},
+  {key:"haab",period:365,label:"Haab&#39; 365",outer:HAAB,x:190,y:340,r:205,teeth:30,tr:182},
+  {key:"tz",period:260,label:"Tzolk&#39;in 260",outer:DAYS,x:515,y:340,r:120,teeth:24,tr:96},
+  {key:"ven",period:584,label:"Venus 584",outer:VENUS.map(v=>v.n),x:418,y:153,r:90,teeth:16,tr:48},
 ];
 const wheelGroups={};
-const svg=svgEl("svg",{viewBox:"0 20 640 500"});
+const svg=svgEl("svg",{viewBox:"-15 55 660 500"});
 G.forEach(L=>{
   const [c1,c2]=COLORS[L.key];
   const rot=svgEl("g",{class:"lw"});
@@ -213,6 +218,10 @@ function update(){
   document.getElementById("st-cr").innerHTML=(((n%18980)+18980)%18980)+"<small> /18,980 天（52 年）</small>";
   document.getElementById("st-align").innerHTML=(((n%37960)+37960)%37960)+"<small> /37,960 天</small>";
 }
+
+// ===== GMT 時鐘 =====
+function tickGMT(){const d=new Date();const p=x=>String(x).padStart(2,'0');const fmt=d.getUTCFullYear()+'/'+p(d.getUTCMonth()+1)+'/'+p(d.getUTCDate())+' '+p(d.getUTCHours())+':'+p(d.getUTCMinutes())+':'+p(d.getUTCSeconds())+' UTC';document.getElementById('gmtClock').textContent=fmt;document.getElementById('gmtRow').textContent='GMT 現在：'+fmt;}
+setInterval(tickGMT,1000);tickGMT();
 
 // ===== 互動 =====
 let timer=null, playing=false;
