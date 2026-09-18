@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>馬雅曆輪 3D — 金字塔三輪 · 馬雅數字 · 互動</title>
+<style>
+  :root{
+    --bg:#0b0d11; --panel:rgba(17,20,27,.82); --card:rgba(24,28,36,.88);
+    --gold:#e6b94d; --jade:#4fd39b; --terra:#e0824a; --sky:#6fc3d8;
+    --text:#ece8da; --muted:#9aa0a6; --dim:#666c74; --border:rgba(230,185,77,.22);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;overflow:hidden}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.6}
+  #stage{position:fixed;inset:0;z-index:0}
+  #stage canvas{display:block}
+  .hud{position:fixed;inset:0;z-index:5;pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:18px}
+  .hud > *{pointer-events:auto}
+  /* ── 左上：標題卡 ── */
+  .hero{max-width:430px;background:var(--panel);border:1px solid var(--border);border-radius:16px;padding:18px 22px 15px;backdrop-filter:blur(10px)}
+  .kicker{font-size:10px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase}
+  .hero h1{font-size:23px;color:var(--gold);margin:4px 0 4px;font-weight:800}
+  .hero .sub{color:var(--muted);font-size:12.5px}
+  .tags{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+  .tag{font-size:10.5px;padding:2px 9px;border-radius:20px;border:1px solid var(--border);color:var(--dim)}
+  /* ── 底部：控制列 ── */
+  .dock{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px;background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:10px 16px;backdrop-filter:blur(10px)}
+  .dock button{background:rgba(32,37,47,.9);color:var(--text);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:8px 16px;font-size:13px;cursor:pointer;transition:.15s}
+  .dock button:hover{border-color:var(--gold);color:var(--gold)}
+  .dock button.primary{background:linear-gradient(160deg,#f0c85e,#c9992e);color:#161006;border:none;font-weight:700}
+  .dock button.primary:hover{filter:brightness(1.08)}
+  .speed{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}
+  .speed input{width:110px;accent-color:var(--gold)}
+  /* ── 右下：讀數 ── */
+  .reads{display:flex;flex-wrap:wrap;gap:8px;max-width:520px;margin-left:auto}
+  .rc{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:9px 14px;min-width:118px;backdrop-filter:blur(8px)}
+  .rc .lab{font-size:9.5px;color:var(--dim);letter-spacing:.12em}
+  .rc .val{font-size:16px;font-weight:700;color:var(--gold);margin-top:2px;line-height:1.25}
+  .rc.jade .val{color:var(--jade)} .rc.terra .val{color:var(--terra)}
+  .hint{text-align:center;color:var(--dim);font-size:10.5px;margin-top:6px;width:100%}
+  /* tooltip */
+  #tip{position:fixed;z-index:9;background:rgba(14,16,21,.94);border:1px solid var(--border);color:var(--text);font-size:12px;padding:7px 11px;border-radius:9px;pointer-events:none;display:none;white-space:nowrap}
+  #tip b{color:var(--gold)}
+  #err{position:fixed;inset:0;z-index:20;display:none;place-items:center;background:var(--bg);color:var(--muted);text-align:center;padding:30px}
+  @media(max-width:760px){ .hero{max-width:300px;padding:12px 16px} .hero h1{font-size:18px} .reads{max-width:100%} }
+</style>
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+</head>
+<body>
+<div id="stage"></div>
+<div class="hud">
+  <div class="hero">
+    <div class="kicker">Maya Calendar · 3D Pyramid Wheels</div>
+    <h1>馬雅曆輪 3D</h1>
+    <p class="sub">三套曆法疊成一座石雕金字塔：<b style="color:#4fd39b">260 天 Tzolk'in</b>（頂層）、<b style="color:#e6b94d">365 天 Haab</b>（中層）、<b style="color:#e0824a">584 天金星</b>（底層）。拖曳旋轉視角、滾輪縮放、按播放看它們以不同速度轉動。</p>
+    <div class="tags"><span class="tag">點＝1 橫棒＝5</span><span class="tag">GMT 584283</span><span class="tag">52 年曆法輪</span><span class="tag">37,960 天對表</span></div>
+  </div>
+  <div style="display:flex;flex-direction:column;gap:8px">
+    <div class="reads">
+      <div class="rc jade"><div class="lab">TZOLK'IN</div><div class="val" id="vTz">—</div></div>
+      <div class="rc"><div class="lab">HAAB</div><div class="val" id="vHaab">—</div></div>
+      <div class="rc terra"><div class="lab">金星 VENUS</div><div class="val" id="vVen">—</div></div>
+      <div class="rc"><div class="lab">讀數日</div><div class="val" id="vOff">今天</div></div>
+    </div>
+    <div class="dock">
+      <button class="primary" id="btnPlay">▶ 播放</button>
+      <button id="btnReset">⟲ 回到今天</button>
+      <label class="speed">速度<input type="range" id="speed" min="1" max="10" value="3"></label>
+      <button id="btnView">攝影機復位</button>
+    </div>
+    <div class="hint">拖曳＝轉視角 · 滾輪／雙指＝縮放 · 滑鼠靠近石牌可看名稱 · 金色光環＝今天</div>
+  </div>
+</div>
+<div id="tip"></div>
+<div id="err"><div><h2 style="color:#e6b94d">無法啟動 3D（WebGL）</h2><p style="margin-top:8px">請改用支援 WebGL 的瀏覽器，或先看<a href="馬雅曆輪_互動齒輪.html" style="color:#4fd39b">2D 曆輪版</a>。</p></div></div>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+/* ════ 曆法核心（與已部署 2D 版完全一致 · GMT 584283 已驗證）════ */
+const TONES=[1,2,3,4,5,6,7,8,9,10,11,12,13];
+const DAYS=["Imix","Ik","Akbal","Kan","Chikchan","Kimi","Manik","Lamat","Muluk","Ok","Chuwen","Eb","Ben","Ix","Men","Kib","Kaban","Etz'nab","Kawak","Ajaw"];
+const HAAB=["Pop","Wo","Sip","Sotz'","Sek","Xul","Yaxk'in","Mol","Ch'en","Yax","Sak","Keh","Mak","K'ank'in","Muwan","Pax","K'ayab","Kumk'u","Wayeb'"];
+const VENUS=[{n:"晨星",d:236},{n:"上合",d:90},{n:"昏星",d:250},{n:"下合",d:8}];
+function jdn(y,m,d){const a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3;return d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045;}
+function mayaFromN(n){const tone=((n%13)+3)%13+1,ds=DAYS[((n%20)+19)%20];const hd=((((n%365)+365)%365)+348)%365;const hm=hd>=360?"Wayeb' "+(hd-360):HAAB[Math.floor(hd/20)]+" "+(hd%20);return{tone,ds,hm};}
+function venusFromN(n){const i=((n%584)+584)%584;let acc=0;for(const p of VENUS){if(i<acc+p.d)return{phase:p.n,day:i-acc,total:p.d};acc+=p.d;}return{phase:"昏星",day:i,total:250};}
+const D0=new Date();
+const BASE_N=jdn(D0.getFullYear(),D0.getMonth()+1,D0.getDate())-584283; // 今天
+const TODAY=mayaFromN(BASE_N);
+
+/* ════ 場景基礎 ════ */
+const stage=document.getElementById('stage');
+let renderer;
+try{
+  renderer=new THREE.WebGLRenderer({antialias:true});
+}catch(e){ document.getElementById('err').style.display='grid'; throw e; }
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.shadowMap.enabled=true;
+renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.12;
+stage.appendChild(renderer.domElement);
+
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#0b0d11');
+scene.fog=new THREE.Fog('#0b0d11',18,34);
+const camera=new THREE.PerspectiveCamera(42,innerWidth/innerHeight,.1,120);
+const CAM_HOME=new THREE.Vector3(0.0,9.8,12.6);
+camera.position.copy(CAM_HOME);
+
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.target.set(0,.9,0);
+controls.enableDamping=true;controls.dampingFactor=.06;
+controls.minDistance=5;controls.maxDistance=30;
+controls.maxPolarAngle=Math.PI*.49;
+controls.autoRotate=true;controls.autoRotateSpeed=.55;
+
+/* 燈光 */
+scene.add(new THREE.HemisphereLight(0xbfd0e0,0x191007,.55));
+const key=new THREE.DirectionalLight(0xfff0d0,1.5);
+key.position.set(7,13,7);key.castShadow=true;
+key.shadow.mapSize.set(2048,2048);
+Object.assign(key.shadow.camera,{left:-9,right:9,top:9,bottom:-9,near:2,far:40});
+scene.add(key);
+const rim=new THREE.DirectionalLight(0x4fd39b,.45);rim.position.set(-8,-3,-6);scene.add(rim);
+const warm=new THREE.PointLight(0xe6b94d,55,0,2);warm.position.set(0,5.2,1.5);scene.add(warm);
+
+/* 材質庫 */
+const MAT={
+  jade :new THREE.MeshStandardMaterial({color:0x2e7d5e,roughness:.36,metalness:.22,emissive:0x0a2b1c,emissiveIntensity:.5}),
+  jadeD:new THREE.MeshStandardMaterial({color:0x17453a,roughness:.5 ,metalness:.18,emissive:0x04150e,emissiveIntensity:.4}),
+  gold :new THREE.MeshStandardMaterial({color:0xd9a93f,roughness:.26,metalness:.85,emissive:0x33230a,emissiveIntensity:.4}),
+  terra:new THREE.MeshStandardMaterial({color:0xc96f43,roughness:.46,metalness:.15,emissive:0x2e130a,emissiveIntensity:.45}),
+  stone:new THREE.MeshStandardMaterial({color:0x22262e,roughness:.78,metalness:.12}),
+  bone :new THREE.MeshStandardMaterial({color:0xd8c49a,roughness:.5 ,metalness:.06,emissive:0x241c0c,emissiveIntensity:.25}),
+};
+
+/* ════ 馬雅數字：點＝1、橫棒＝5（立體石雕）════ */
+function mayaNumGroup(n){
+  n=((n%20)+20)%20;
+  const g=new THREE.Group();
+  if(n===0){ // 貝殼零：扁圓盤＋刻痕
+    const shell=new THREE.Mesh(new THREE.CylinderGeometry(.16,.19,.05,14),MAT.gold);
+    shell.rotation.x=Math.PI/2; g.add(shell);
+    return g;
+  }
+  const bars=Math.floor(n/5),dots=n%5;
+  for(let b=0;b<bars;b++){
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(.52,.13,.09),MAT.gold);
+    bar.position.y=.10+b*.20; g.add(bar);
+  }
+  const rowW=(dots-1)*.15;
+  for(let d=0;d<dots;d++){
+    const dot=new THREE.Mesh(new THREE.SphereGeometry(.085,14,12),MAT.gold);
+    dot.position.set(-rowW/2+d*.15, .10+bars*.20+.17, 0); g.add(dot);
+  }
+  return g;
+}
+
+/* ════ glyph 紋章：圓角石牌＋抽象徽飾（seed 決定圖樣變體）════ */
+function roundedPlate(w,h,r,d,mat){
+  const s=new THREE.Shape();
+  s.moveTo(-w/2+r,-h/2);s.lineTo(w/2-r,-h/2);s.quadraticCurveTo(w/2,-h/2,w/2,-h/2+r);
+  s.lineTo(w/2,h/2-r);s.quadraticCurveTo(w/2,h/2,w/2-r,h/2);s.lineTo(-w/2+r,h/2);
+  s.quadraticCurveTo(-w/2,h/2,-w/2,h/2-r);s.lineTo(-w/2,-h/2+r);s.quadraticCurveTo(-w/2,-h/2,-w/2+r,-h/2);
+  const geo=new THREE.ExtrudeGeometry(s,{depth:d,bevelEnabled:true,bevelThickness:.025,bevelSize:.028,bevelSegments:3,curveSegments:8});
+  const m=new THREE.Mesh(geo,mat);m.castShadow=true;m.receiveShadow=true;return m;
+}
+function makeCartouche(seed,tintMat){
+  const g=new THREE.Group();
+  const plate=roundedPlate(.82,.66,.16,.07,tintMat||MAT.bone);
+  plate.position.z=-.03; g.add(plate);
+  // 徽飾層（金）——隨 seed 組合：外框 + 主紋(日輪/金星眼/階梯) + 底部記數點
+  const em=new THREE.Group();
+  const kind=seed%4;
+  if(kind===0){ // 日輪 Kin：圓心＋放射短棒
+    em.add(new THREE.Mesh(new THREE.TorusGeometry(.17,.035,8,24),MAT.gold));
+    const core=new THREE.Mesh(new THREE.CircleGeometry(.06,16),MAT.terra);core.position.z=.004;em.add(core);
+    for(let i=0;i<8;i++){const ray=new THREE.Mesh(new THREE.BoxGeometry(.05,.11,.02),MAT.gold);
+      const a=i*Math.PI/4;ray.position.set(Math.cos(a)*.27,Math.sin(a)*.27,.001);ray.rotation.z=a-Math.PI/2;em.add(ray);}
+  }else if(kind===1){ // 金星眼 Star：菱形十字
+    const dia=new THREE.Mesh(new THREE.BoxGeometry(.34,.34,.02),MAT.gold);dia.rotation.z=Math.PI/4;em.add(dia);
+    const dia2=new THREE.Mesh(new THREE.BoxGeometry(.46,.1,.02),MAT.gold);dia2.rotation.z=Math.PI/4;em.add(dia2);
+    const eye=new THREE.Mesh(new THREE.CircleGeometry(.05,12),MAT.jade);eye.position.z=.004;em.add(eye);
+  }else if(kind===2){ // 階梯金字塔
+    let w=.44,y=-.22;
+    for(let i=0;i<3;i++){const st=new THREE.Mesh(new THREE.BoxGeometry(w,.11,.02),MAT.gold);
+      st.position.y=y;y+=.145;w-=.13;em.add(st);}
+    const top=new THREE.Mesh(new THREE.CircleGeometry(.045,10),MAT.terra);top.position.set(0,.26,.004);em.add(top);
+  }else{ // 月結繩：橫桿＋垂點
+    const bar=new THREE.Mesh(new THREE.BoxGeometry(.42,.07,.02),MAT.gold);bar.position.y=.14;em.add(bar);
+    const nDots=2+(seed%3);
+    for(let i=0;i<nDots;i++){const dt=new THREE.Mesh(new THREE.SphereGeometry(.05,10,10),MAT.gold);
+      dt.position.set(-.12+i*.12,.01,.002);em.add(dt);}
+    const hook=new THREE.Mesh(new THREE.TorusGeometry(.09,.03,6,16,Math.PI),MAT.gold);
+    hook.position.y=-.1;hook.rotation.z=Math.PI;em.add(hook);
+  }
+  // 外框刻線
+  const frame=new THREE.Mesh(new THREE.RingGeometry?new THREE.PlaneGeometry(0,0):null,{});
+  em.position.z=.055;
+  g.add(em);
+  return g;
+}
+
+/* ════ 輪盤建構 ════ */
+const wheelRoot=new THREE.Group();scene.add(wheelRoot);
+const ALL_CARTS=[];// {cart, name, ringKey, idx, angle}
+function buildRing(cfg){
+  const grp=new THREE.Group();
+  grp.position.y=cfg.y;
+  /* 盤身：環狀擠出＋斜面 */
+  const s=new THREE.Shape();s.absarc(0,0,cfg.rOut,0,Math.PI*2,false);
+  const hole=new THREE.Path();hole.absarc(0,0,cfg.rIn,0,Math.PI*2,true);s.holes.push(hole);
+  const discGeo=new THREE.ExtrudeGeometry(s,{depth:cfg.thick,bevelEnabled:true,bevelThickness:.05,bevelSize:.06,bevelSegments:3,curveSegments:64});
+  discGeo.rotateX(Math.PI/2);
+  const disc=new THREE.Mesh(discGeo,cfg.discMat);
+  disc.castShadow=true;disc.receiveShadow=true;
+  disc.position.z=-cfg.thick/2;
+  grp.add(disc);
+  /* 內緣金環 */
+  const trim=new THREE.Mesh(new THREE.TorusGeometry(cfg.rIn+.04,.022,10,72),MAT.gold);
+  trim.rotation.x=Math.PI/2;grp.add(trim);
+  /* 刻字帶：環形文字 canvas 貼到透明環 */
+  const bandTex=makeBandTexture(cfg.bandText,cfg.bandColor);
+  const band=new THREE.Mesh(
+    new THREE.CylinderGeometry(cfg.rMid,cfg.rMid,cfg.thick*.92,96,1,true),
+    new THREE.MeshStandardMaterial({map:bandTex,transparent:true,roughness:.6,metalness:.1,
+      emissive:0xffffff,emissiveMap:bandTex,emissiveIntensity:.55}));
+  band.rotation.y=Math.PI/2; // 讓接縫朝後
+  grp.add(band);
+  /* 紋章石牌 */
+  cfg.items.forEach((name,i)=>{
+    const N=cfg.items.length;
+    const ang=i/N*Math.PI*2 - Math.PI/2;
+    const cart=makeCartouche(i+cfg.seed,cfg.cartMat);
+    cart.position.set(Math.cos(ang)*cfg.cartR,0,Math.sin(ang)*cfg.cartR);
+    cart.rotation.y=-ang+Math.PI/2;
+    grp.add(cart);
+    ALL_CARTS.push({obj:cart,name:name,ring:cfg.key,idx:i,angle:ang});
+  });
+  /* 數字帶（馬雅點棒）*/
+  if(cfg.numCount){
+    for(let i=0;i<cfg.numCount;i++){
+      const ang=(i/cfg.numCount)*Math.PI*2 - Math.PI/2;
+      const num=mayaNumGroup((i%cfg.numMod)+1);
+      num.position.set(Math.cos(ang)*cfg.numR,0,-Math.sin(ang)*cfg.numR);
+      num.rotation.x=-Math.PI/2;   // 平躺在盤面上
+      num.scale.setScalar(cfg.numScale);
+      grp.add(num);
+    }
+  }
+  /* 今天標記座（之後放光環用，跟著轉）*/
+  wheelRoot.add(grp);
+  return grp;
+}
+
+/* 環形刻字帶 texture */
+function makeBandTexture(text,color){
+  const W=2048,H=96;
+  const cv=document.createElement('canvas');cv.width=W;cv.height=H;
+  const ctx=cv.getContext('2d');
+  ctx.clearRect(0,0,W,H);
+  ctx.font='600 54px -apple-system,"PingFang TC",sans-serif';
+  ctx.textBaseline='middle';
+  ctx.fillStyle=color;
+  // 文字重複填滿整圈
+  let x=30;
+  while(x<W-60){
+    ctx.fillText(text,x,H/2);
+    x+=ctx.measureText(text).width+70;
+    ctx.fillStyle=color;
+  }
+  // 分隔菱形
+  ctx.fillStyle='rgba(230,185,77,.85)';
+  x=0;
+  while(x<W){
+    ctx.save();ctx.translate(x,H/2);ctx.rotate(Math.PI/4);ctx.fillRect(-7,-7,14,14);ctx.restore();
+    x+=W/Math.max(6,Math.floor(W/260));
+  }
+  const tex=new THREE.CanvasTexture(cv);
+  tex.wrapS=THREE.RepeatWrapping;
+  tex.repeat.set(1,1);
+  tex.anisotropy=8;
+  tex.colorSpace=THREE.SRGBColorSpace;
+  return tex;
+}
+
+/* ════ 三輪定義（金字塔疊層）════ */
+const R_TZ =buildRing({key:'tz', y:1.62,rIn:1.02,rOut:1.98,rMid:1.86,cartR:1.50,numR:1.18,numScale:.62,numCount:13,numMod:13,
+  thick:.24,discMat:MAT.jade, cartMat:null, seed:0,
+  items:DAYS, bandText:"TZOLK'IN · 260 · ",bandColor:'rgba(210,255,235,.9)'});
+const R_HAAB=buildRing({key:'haab',y:0.78,rIn:2.18,rOut:3.38,rMid:3.22,cartR:2.82,numR:2.36,numScale:.62,numCount:18,numMod:13,
+  thick:.30,discMat:new THREE.MeshStandardMaterial({color:0x6d5622,roughness:.4,metalness:.3,emissive:0x201404,emissiveIntensity:.45}),
+  cartMat:null, seed:7, items:HAAB, bandText:"HAAB · 365 · ",bandColor:'rgba(255,238,200,.92)'});
+const R_VEN =buildRing({key:'ven', y:0.10,rIn:3.62,rOut:4.58,rMid:4.40,cartR:4.12,numR:0,numScale:0,numCount:0,numMod:13,
+  thick:.26,discMat:new THREE.MeshStandardMaterial({color:0x6e3a20,roughness:.48,metalness:.2,emissive:0x220d04,emissiveIntensity:.5}),
+  cartMat:null, seed:3, items:VENUS.map(v=>v.n+"·"+v.d), bandText:"VENUS · 584 · ",bandColor:'rgba(255,215,185,.92)'});
+
+/* 金星輪中央徽章（大日輪）*/
+const sunBadge=new THREE.Group();
+{
+  const disc=new THREE.Mesh(new THREE.CylinderGeometry(.94,1.02,.22,48),MAT.gold);
+  sunBadge.add(disc);
+  const rays=new THREE.Group();
+  for(let i=0;i<16;i++){const ray=new THREE.Mesh(new THREE.BoxGeometry(.07,.26,.05),MAT.gold);
+    const a=i/16*Math.PI*2;ray.position.set(Math.cos(a)*.78,.13,Math.sin(a)*.78);
+    ray.rotation.y=-a+Math.PI/2;rays.add(ray);}
+  sunBadge.add(rays);
+  const core=new THREE.Mesh(new THREE.CylinderGeometry(.3,.34,.26,32),MAT.terra);
+  core.position.y=.03;sunBadge.add(core);
+  sunBadge.position.y=.10;
+  scene.add(sunBadge);
+}
+
+/* 中央軸柱 */
+const pillar=new THREE.Mesh(new THREE.CylinderGeometry(.16,.22,3.1,20),MAT.stone);
+pillar.position.y=.75;pillar.castShadow=true;wheelRoot.add(pillar);
+
+/* ════ 今天光環（脈動）════ */
+const pulseRings=[];
+function addPulse(ringGroup,radius,angle,color){
+  const m=new THREE.MeshBasicMaterial({color:color,transparent:true,opacity:.9});
+  const halo=new THREE.Mesh(new THREE.TorusGeometry(radius,.05,10,48),m);
+  halo.rotation.x=Math.PI/2;
+  halo.position.set(Math.cos(angle)*radius,0,Math.sin(angle)*radius);
+  ringGroup.add(halo);
+  pulseRings.push(halo);
+}
+const tzIdx=DAYS.indexOf(TODAY.ds);
+const haabMonth=TODAY.hm.split(' ')[0];
+let haabIdx=HAAB.indexOf(haabMonth);
+addPulse(R_TZ ,1.50,(tzIdx/20)*Math.PI*2 - Math.PI/2,0xffe08a);
+if(haabIdx>=0) addPulse(R_HAAB,2.82,(haabIdx/19)*Math.PI*2 - Math.PI/2,0xffe08a);
+
+/* 地台 */
+const floor=new THREE.Mesh(new THREE.CircleGeometry(9,64),
+  new THREE.MeshStandardMaterial({color:0x14171d,roughness:.95,metalness:0}));
+floor.rotation.x=-Math.PI/2;floor.position.y=-.62;floor.receiveShadow=true;scene.add(floor);
+const floorRing=new THREE.Mesh(new THREE.TorusGeometry(5.6,.035,8,96),
+  new THREE.MeshBasicMaterial({color:0xe6b94d,transparent:true,opacity:.28}));
+floorRing.rotation.x=Math.PI/2;floorRing.position.y=-.60;scene.add(floorRing);
+
+/* 星空背景 */
+{
+  const n=650,pos=new Float32Array(n*3);
+  for(let i=0;i<n;i++){
+    const r=20+Math.random()*26,th=Math.random()*Math.PI*2,ph=Math.acos(Math.random()*2-1);
+    pos[i*3]=r*Math.sin(ph)*Math.cos(th);pos[i*3+1]=r*Math.cos(ph)*.6+3;pos[i*3+2]=r*Math.sin(ph)*Math.sin(th);
+  }
+  const gg=new THREE.BufferGeometry();gg.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  scene.add(new THREE.Points(gg,new THREE.PointsMaterial({color:0x8fa8c0,size:.055,transparent:true,opacity:.7})));
+}
+
+/* ════ 互動：播放／拖曳天數／讀數 ════ */
+let dayOffset=0;          // 相對今天的天數位移
+let playing=false,speed=3;
+const elTz=document.getElementById('vTz'),elHaab=document.getElementById('vHaab'),
+      elVen=document.getElementById('vVen'),elOff=document.getElementById('vOff');
+
+function applyOffset(n){
+  dayOffset=n;
+  R_TZ.rotation.y  =  360*n/260*(Math.PI/180);
+  R_HAAB.rotation.y= -360*n/365*(Math.PI/180);   // 反向咬合感
+  R_VEN.rotation.y =  360*n/584*(Math.PI/180);
+}
+function readAt(n){
+  const total=BASE_N+n;
+  const m=mayaFromN(total);
+  const v=venusFromN(total);
+  return {m,v};
+}
+function updateReadout(){
+  const {m,v}=readAt(dayOffset);
+  elTz.textContent=m.tone+' '+m.ds;
+  elHaab.textContent=m.hm;
+  elVen.textContent=v.phase+' '+(v.day+1)+'/'+v.total;
+  elOff.textContent=(dayOffset===0)?'今天':(dayOffset>0?'+':'')+dayOffset+' 天';
+}
+
+/* 按鈕 */
+const btnPlay=document.getElementById('btnPlay');
+btnPlay.onclick=()=>{playing=!playing;btnPlay.textContent=playing?'⏸ 暫停':'▶ 播放';};
+document.getElementById('btnReset').onclick=()=>{playing=false;btnPlay.textContent='▶ 播放';applyOffset(0);updateReadout();};
+document.getElementById('btnView').onclick=()=>{camera.position.copy(CAM_HOME);controls.target.set(0,.9,0);};
+document.getElementById('speed').oninput=e=>speed=+e.target.value;
+
+/* 直接點石牌 → 跳到該日（Tzolk'in 日名對齊）*/
+const ray=new THREE.Raycaster(),ptr=new THREE.Vector2(),tip=document.getElementById('tip');
+let downXY=null;
+renderer.domElement.addEventListener('pointerdown',e=>{downXY=[e.clientX,e.clientY];controls.autoRotate=false;});
+addEventListener('pointerup',()=>{setTimeout(()=>{if(!playing)controls.autoRotate=true;},2500);});
+renderer.domElement.addEventListener('pointermove',e=>{
+  ptr.x=e.clientX/innerWidth*2-1;ptr.y=-(e.clientY/innerHeight)*2+1;
+  ray.setFromCamera(ptr,camera);
+  const hits=ray.intersectObjects(ALL_CARTS.map(c=>c.obj),true);
+  if(hits.length){
+    let o=hits[0].object;while(o.parent&&o.userData.name===undefined){o=o.parent;}
+    const c=ALL_CARTS.find(cc=>cc.obj===o);
+    if(c){
+      tip.style.display='block';
+      tip.style.left=(e.clientX+14)+'px';tip.style.top=(e.clientY+10)+'px';
+      tip.innerHTML='<b>'+c.ring.toUpperCase()+'</b> · '+c.name;
+      renderer.domElement.style.cursor='pointer';
+      return;
+    }
+  }
+  tip.style.display='none';renderer.domElement.style.cursor='grab';
+});
+renderer.domElement.addEventListener('click',e=>{
+  if(!downXY)return;
+  const dx=e.clientX-downXY[0],dy=e.clientY-downXY[1];
+  if(dx*dx+dy*dy>25)return; // 拖曳不算點擊
+  ptr.x=e.clientX/innerWidth*2-1;ptr.y=-(e.clientY/innerHeight)*2+1;
+  ray.setFromCamera(ptr,camera);
+  const hits=ray.intersectObjects(ALL_CARTS.map(c=>c.obj),true);
+  if(hits.length){
+    let o=hits[0].object;while(o.parent&&o.userData.name===undefined)o=o.parent;
+    const c=ALL_CARTS.find(cc=>cc.obj===o);
+    if(c&&c.ring==='tz'){
+      // 把 Tzolk'in 轉到讓這個日名朝向鏡頭前（角度補償）
+      const cur=R_TZ.rotation.y;
+      const want=-(c.angle+Math.PI/2)+Math.PI; // 讓它轉到正前
+      applyOffset(dayOffset+Math.round(((want-cur)*260/(2*Math.PI))%260)||dayOffset);
+      updateReadout();
+    }
+  }
+});
+
+/* 主循環 */
+const clock=new THREE.Clock();
+function tick(){
+  requestAnimationFrame(tick);
+  const dt=clock.getDelta();
+  if(playing){applyOffset(dayOffset+dt*speed*2.2);updateReadout();}
+  pulseRings.forEach(h=>{
+    const s=1+Math.sin(clock.elapsedTime*3)*.14;
+    h.scale.set(s,1,s);
+    h.material.opacity=.65+Math.sin(clock.elapsedTime*3)*.3;
+  });
+  controls.update();
+  renderer.render(scene,camera);
+}
+applyOffset(0);updateReadout();tick();
+addEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});
+</script>
+</body>
+</html>

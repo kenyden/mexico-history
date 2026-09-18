@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>太陽 · 金星 · 地球 — 3D 運行軌道</title>
+<style>
+  :root{
+    --bg:#0b0d11; --panel:#12151c; --card:#181d26; --card2:#1f2530;
+    --gold:#e6b94d; --gold2:#f0c85e; --jade:#4fd39b; --terra:#e0824a;
+    --sky:#5aa7e8; --text:#ece8da; --muted:#9aa0a6; --dim:#6a707a; --border:#2a303b;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,"PingFang TC","Noto Sans TC",sans-serif;line-height:1.65;min-height:100vh}
+  /* header */
+  .hero{text-align:center;padding:30px 20px 8px}
+  .kicker{font-size:11px;letter-spacing:.26em;color:var(--gold);text-transform:uppercase}
+  .hero h1{font-size:28px;color:var(--gold);margin:6px 0;font-weight:800}
+  .hero .sub{color:var(--muted);font-size:13.5px;max-width:760px;margin:0 auto}
+  /* stage */
+  .stage-card{position:relative;height:72vh;min-height:480px;background:radial-gradient(ellipse at 50% 42%,#121824,#05060a 78%);
+    border:1px solid var(--border);border-radius:18px;overflow:hidden;margin:16px auto 6px;max-width:1180px}
+  #stage{position:absolute;inset:0}
+  #stage canvas{display:block;cursor:grab}
+  #stage canvas:active{cursor:grabbing}
+  .stage-tip{position:absolute;left:14px;top:12px;z-index:4;background:rgba(14,17,23,.82);border:1px solid var(--border);
+    border-radius:10px;padding:7px 13px;font-size:11.5px;color:var(--muted)}
+  .stage-tip b{color:var(--gold)}
+  /* top-left HUD */
+  #hud{position:absolute;right:14px;top:12px;z-index:5;background:rgba(14,17,23,.82);border:1px solid var(--border);
+    border-radius:10px;padding:9px 13px;font-size:12px;color:var(--muted);line-height:1.5}
+  #hud b{color:var(--gold)}
+  /* dock */
+  .dock{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;align-items:center;
+    background:var(--card);border:1px solid var(--border);border-radius:14px;padding:10px 14px;margin:0 auto 60px;max-width:960px}
+  .dock button{background:var(--card2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:7px 15px;font-size:13px;cursor:pointer;transition:.15s}
+  .dock button:hover{border-color:var(--gold);color:var(--gold)}
+  .dock button.active{background:linear-gradient(160deg,var(--gold2),#c9992e);color:#171006;border:none;font-weight:700}
+  .speed{display:flex;align-items:center;gap:7px;color:var(--muted);font-size:12px}
+  .speed input{width:110px;accent-color:var(--gold)}
+  .sep{width:1px;height:26px;background:var(--border)}
+  /* legend */
+  .legend{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;font-size:12px;color:var(--muted)}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+</style>
+</head>
+<body>
+  <div class="hero">
+    <div class="kicker">Heliocentric · 3D</div>
+    <h1>太陽 · 金星 · 地球 — 立體運行軌道</h1>
+    <div class="sub">上帝視角俯視內太陽系。金星是內行星：拖曳旋轉、滾輪縮放；下方按鈕切換<b>真實比例</b>與<b>地球視角</b>。</div>
+  </div>
+
+  <div class="stage-card">
+    <div id="stage"></div>
+    <div class="stage-tip">🖱 拖曳旋轉　·　滾輪縮放　·　<b>地球視角</b>可看晨星/昏星</div>
+    <div id="hud">
+      日期：<b id="hudDate">—</b><br>
+      金星：<b id="hudVen">—</b><br>
+      月亮：<b id="hudMoon">—</b>
+    </div>
+  </div>
+
+  <div class="dock">
+    <button id="btnPlay" class="active">⏸ 暫停</button>
+    <button id="btnSpeed1">▶ 1×</button>
+    <button id="btnSpeed8">▶ 8×</button>
+    <button id="btnSpeed32">▶ 32×</button>
+    <div class="sep"></div>
+    <button id="btnScale">🔭 切換比例：放大</button>
+    <button id="btnGod">🌍 切到地球視角</button>
+    <div class="sep"></div>
+    <button id="btnReset">⟲ 重置視角</button>
+    <div class="speed">
+      <label>☀ 時間(天)</label>
+      <input type="range" id="daySlider" min="-600" max="1200" value="0">
+    </div>
+  </div>
+
+  <div class="legend">
+    <span><span class="dot" style="background:#f5d76e;box-shadow:0 0 8px #f5d76e"></span>太陽</span>
+    <span><span class="dot" style="background:#e8a33d"></span>金星 <i>(0.72 AU)</i></span>
+    <span><span class="dot" style="background:#5aa7e8"></span>地球 <i>(1.00 AU)</i></span>
+    <span><span class="dot" style="background:#c9ced6"></span>月球</span>
+    <span><span class="dot" style="background:#7a4e2d"></span>金星軌道</span>
+    <span><span class="dot" style="background:#35506b"></span>地球軌道</span>
+  </div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+// ── 系統常數（真實天文數據）────────────────────────────
+const ORBITS = {
+  venus: { a: 0.72, period: 224.7,   color: 0xe8a33d, glow: 0xffb14d },
+  earth: { a: 1.00, period: 365.25,  color: 0x5aa7e8, glow: 0x7cc4ff }
+};
+// 公轉速率（角度/天，rad）
+const OMEGA = {
+  venus: (2*Math.PI)/ORBITS.venus.period,
+  earth: (2*Math.PI)/ORBITS.earth.period
+};
+// 月球：繞地球，會合周期 29.53 天
+const MOON_PERIOD = 29.53;
+// 預設經放大比例：讓視覺好觀看（真實 1AU≈巨大，放大時強制拉開）
+const SCALE_EXPANDED = { sun: 1.6, planet: 3.0, moon: 0.5 };
+const SCALE_REAL = { sun: 1.0, planet: 1.0, moon: 1.0 };
+
+// ── DOM ─────────────────────────────────────────
+const el = {
+  stage: document.getElementById('stage'),
+  date: document.getElementById('hudDate'),
+  ven: document.getElementById('hudVen'),
+  moon: document.getElementById('hudMoon')
+};
+const $ = id => document.getElementById(id);
+
+// ── 場景 ────────────────────────────────────────
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, 1, 0.1, 2000);
+const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+el.stage.appendChild(renderer.domElement);
+
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.dampingFactor = 0.08;
+controls.maxDistance = 300;
+controls.minDistance = 3;
+
+// 天體群組
+const sunGroup = new THREE.Group(); scene.add(sunGroup);
+const venusOrbitGrp = new THREE.Group(); scene.add(venusOrbitGrp);
+const earthOrbitGrp = new THREE.Group(); scene.add(earthOrbitGrp);
+
+// ── 光源 ────────────────────────────────────────
+scene.add(new THREE.AmbientLight(0x445566, 0.6));
+const sunLight = new THREE.PointLight(0xfff2cc, 2.5, 0, 0);
+scene.add(sunLight);
+
+// ── 太陽（自發光）───────────────────────────────
+function makeSun(){
+  const geo = new THREE.SphereGeometry(1.05, 48, 48);
+  const mat = new THREE.MeshBasicMaterial({ color:0xffdf80 });
+  const sun = new THREE.Mesh(geo, mat);
+  // 外層光暈
+  const glowGeo = new THREE.SphereGeometry(1.35, 48, 48);
+  const glowMat = new THREE.MeshBasicMaterial({ color:0xffb14d, transparent:true, opacity:0.18 });
+  sunGroup.add(sun); sunGroup.add(new THREE.Mesh(glowGeo, glowMat));
+  sunGroup.add(new THREE.Mesh(new THREE.SphereGeometry(1.75,48,48),
+    new THREE.MeshBasicMaterial({ color:0xff9a3d, transparent:true, opacity:0.07 })));
+  sunLight.position.set(0,0,0);
+}
+makeSun();
+
+// ── 軌道線 ──────────────────────────────────────
+function makeOrbit(a, color){
+  const pts=[]; for(let i=0;i<=160;i++){ const t=i/160*2*Math.PI; pts.push(new THREE.Vector3(Math.cos(t)*a,0,Math.sin(t)*a)); }
+  const line=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),
+    new THREE.LineBasicMaterial({ color, transparent:true, opacity:0.5 }));
+  return line;
+}
+scene.add(makeOrbit(ORBITS.venus.a, 0x7a4e2d));
+scene.add(makeOrbit(ORBITS.earth.a, 0x35506b));
+
+// ── 天體容器 ────────────────────────────────────
+const bodies = {};
+function makePlanet(name, orbit){
+  const g = new THREE.Group();
+  const geo = new THREE.SphereGeometry(0.5, 32, 32);
+  const mat = new THREE.MeshStandardMaterial({ color:orbit.color, roughness:0.7, metalness:0.1 });
+  const mesh = new THREE.Mesh(geo, mat);
+  const glow = new THREE.Mesh(new THREE.SphereGeometry(0.78,32,32),
+    new THREE.MeshBasicMaterial({ color:orbit.glow, transparent:true, opacity:0.12 }));
+  g.add(mesh); g.add(glow);
+  bodies[name]={ group:g, mesh };
+  return g;
+}
+const venus = makePlanet('venus', ORBITS.venus);
+const earth = makePlanet('earth', ORBITS.earth);
+venusOrbitGrp.add(venus);
+earthOrbitGrp.add(earth);
+
+// ── 月亮繞地球 ──────────────────────────────────
+const moonGrp = new THREE.Group(); earth.add(moonGrp);
+const moonMesh = new THREE.Mesh(new THREE.SphereGeometry(0.18,24,24),
+  new THREE.MeshStandardMaterial({ color:0xc9ced6, roughness:0.9 }));
+const moonOrbitLine = makeOrbit(1.45, 0x3d4652);
+moonGrp.add(moonMesh, moonOrbitLine);
+
+// ── 標籤 ────────────────────────────────────────
+function makeLabel(txt, color){
+  const c = document.createElement('canvas'); c.width=256; c.height=72;
+  const x = c.getContext('2d');
+  x.font = 'bold 30px "PingFang TC","Noto Sans TC",sans-serif'; x.textAlign='center'; x.textBaseline='middle';
+  x.fillStyle = color; x.shadowColor='rgba(0,0,0,.9)'; x.shadowBlur=12; x.fillText(txt,128,36);
+  const tex = new THREE.CanvasTexture(c);
+  const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map:tex, transparent:true, depthTest:false }));
+  sprite.scale.set(3.2,0.9,1);
+  return sprite;
+}
+const labSun = makeLabel('☀ 太陽','#ffe9a8'); sunGroup.add(labSun); labSun.position.y=2.2;
+const labVen = makeLabel('金星','#ffcf8a'); venus.add(labVen); labVen.position.y=1.5;
+const labEar = makeLabel('地球','#9fd0ff'); earth.add(labEar); labEar.position.y=1.5;
+const labMoo = makeLabel('月球','#d8dde4'); moonGrp.add(labMoo); labMoo.position.y=0.85;
+
+// ── 狀態 ────────────────────────────────────────
+const state = {
+  tDays: 0,        // 起始 0 = 今天
+  playing: true,
+  speed: 8,        // 天/秒
+  expanded: true,  // 放大比例 or 真實
+  camGod: true,
+  daySliderDrag: false
+};
+
+// ── 天體定位 ────────────────────────────────────
+function positionBodies(s){
+  const scaleMul = state.expanded ? 1 : 0.45; // 真實比例也略放大，否則太小
+  const scl = state.expanded ? SCALE_EXPANDED : SCALE_REAL;
+
+  // 太陽
+  sunGroup.scale.set(scl.sun*scl.sun, scl.sun*scl.sun, scl.sun*scl.sun);
+
+  const thV = s * OMEGA.venus;
+  const thE = s * OMEGA.earth;
+
+  const rv = ORBITS.venus.a * scaleMul;
+  const re = ORBITS.earth.a * scaleMul;
+  venus.position.set(Math.cos(thV)*rv, 0, Math.sin(thV)*rv);
+  earth.position.set(Math.cos(thE)*re, 0, Math.sin(thE)*re);
+
+  // 行星本體大小（真實比例下縮小；放大版略放大）
+  const ps = state.expanded ? 1 : 0.55;
+  venus.scale.setScalar(ps*scl.planet);
+  earth.scale.setScalar(ps*scl.planet);
+
+  // 月球：繞地球（視為從地球往外 1.45 單位）
+  const thM = s * (2*Math.PI/MOON_PERIOD) + 0.7;
+  moonMesh.position.set(Math.cos(thM)*1.45*scaleMul, 0, Math.sin(thM)*1.45*scaleMul);
+  moonGrp.scale.setScalar(state.expanded?1:0.6);
+
+  // 太陽光跟隨
+  sunLight.intensity = state.expanded ? 2.4 : 3.2;
+}
+
+// ── HUD ─────────────────────────────────────────
+function fmtDate(d){
+  const dt=new Date(Date.now()+d*86400000);
+  return `${dt.getFullYear()}-${String(dt.getMonth()+1).padStart(2,'0')}-${String(dt.getDate()).padStart(2,'0')}`;
+}
+function updateHUD(){
+  el.date.textContent = fmtDate(state.tDays);
+  // 金星狀態
+  const s = state.tDays;
+  const phase = ((s/584.0)%1+1)%1; // 584天會合周期
+  let venTxt;
+  if(phase < 236/584) venTxt='🌅 晨星（東方）';
+  else if(phase < (236+90)/584) venTxt='☀ 上合·不可見';
+  else if(phase < (236+90+250)/584) venTxt='🌇 昏星（西方）';
+  else venTxt='☀ 下合·（凌日窗口）';
+  el.ven.textContent = venTxt;
+  // 月相（粗略：0=新月,0.5=滿月）
+  const mp = ((s/MOON_PERIOD)%1+1)%1;
+  const names=['🌑 新月','🌒 眉月','🌓 上弦','🌔 盈凸','🌕 滿月','🌖 虧凸','🌗 下弦','🌘 殘月'];
+  const idx = Math.round(mp*8)%8;
+  el.moon.textContent = names[idx];
+}
+
+// ── 視角 ───────────────────────────────────────
+let godCamPos = null;
+function applyView(){
+  if(state.camGod){
+    camera.position.set(0, 26, 22);
+    camera.up.set(0,1,0);
+    controls.target.set(0,0,0);
+  } else {
+    // 地球視角：站在地球上往太陽/金星看
+    camera.position.set(earth.position.x, 1.2, earth.position.z);
+    camera.up.set(0,1,0);
+    controls.target.set(sunGroup.position.x, 0, sunGroup.position.z);
+  }
+  controls.update();
+}
+$('btnGod').addEventListener('click', ()=>{
+  state.camGod=!state.camGod;
+  $('btnGod').textContent = state.camGod ? '🌍 切到地球視角' : '🛰 切回上帝視角';
+  applyView();
+});
+$('btnScale').addEventListener('click', ()=>{
+  state.expanded=!state.expanded;
+  $('btnScale').textContent = '🔭 切換比例：'+(state.expanded?'放大':'真實');
+  positionBodies(state.tDays);
+});
+$('btnReset').addEventListener('click', ()=>{ state.camGod=true; $('btnGod').textContent='🌍 切到地球視角'; applyView(); });
+
+// ── 播放/速度 ───────────────────────────────────
+$('btnPlay').addEventListener('click', ()=>{
+  state.playing=!state.playing;
+  $('btnPlay').textContent = state.playing?'⏸ 暫停':'▶ 播放';
+});
+const speeds={1:1,8:8,32:32,0:0};
+$('btnSpeed1').addEventListener('click',()=>setSpeed(1));
+$('btnSpeed8').addEventListener('click',()=>setSpeed(8));
+$('btnSpeed32').addEventListener('click',()=>setSpeed(32));
+function setSpeed(x){ state.speed=x; positionBodies(state.tDays); }
+
+// ── 時間滑桿 ────────────────────────────────────
+$('daySlider').addEventListener('input', e=>{
+  state.daySliderDrag=true;
+  state.tDays=parseFloat(e.target.value);
+  positionBodies(state.tDays); updateHUD();
+});
+$('daySlider').addEventListener('change',()=>{ state.daySliderDrag=false; });
+
+// ── 動畫循環 ────────────────────────────────────
+const clock=new THREE.Clock();
+function animate(){
+  requestAnimationFrame(animate);
+  const dt=clock.getDelta();
+  if(state.playing && !state.daySliderDrag){
+    state.tDays += dt*state.speed;
+    // 限範圍（-600 ~ 1200 天）
+    state.tDays=Math.max(-600,Math.min(1200,state.tDays));
+    $('daySlider').value=state.tDays;
+    positionBodies(state.tDays); updateHUD();
+  }
+  if(state.camGod) controls.update(); else { earth.lookAt(sunGroup.position); controls.update(); }
+  renderer.render(scene,camera);
+}
+
+// ── 尺寸 ────────────────────────────────────────
+function resize(){
+  const w=el.stage.clientWidth, h=el.stage.clientHeight;
+  camera.aspect=w/h; camera.updateProjectionMatrix();
+  renderer.setSize(w,h);
+}
+window.addEventListener('resize', resize);
+
+// ── 啟動 ────────────────────────────────────────
+resize();
+camera.position.set(0,26,22);
+controls.target.set(0,0,0);
+positionBodies(0);
+updateHUD();
+animate();
+</script>
+</body>
+</html>
